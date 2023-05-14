@@ -2,6 +2,7 @@
 // Created by ale on 14/05/23.
 //
 
+#include <iostream>
 #include "User.h"
 
 const std::string &User::getId() const {
@@ -34,4 +35,9 @@ const std::string &User::getMailBoxPath() const {
 
 void User::setMailBoxPath(const std::string &mailBoxPath) {
     User::mailBoxPath = mailBoxPath;
+}
+
+void User::toString() const {
+    std::cout << "Id: " << id << "\nName: " << name << "\nSurname: " << surname << "\nMailBox Path: " << mailBoxPath << std::endl;
+
 }
