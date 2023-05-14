@@ -37,6 +37,8 @@ public:
     const std::string &getMailBoxPath() const;
 
     void setMailBoxPath(const std::string &mailBoxPath);
+
+    void toString() const;
 };
 
 
