@@ -17,14 +17,15 @@ private:
     std::string createdAt;
 
 public:
-    User(std::string id, std::string name, std::string surname, std::string mailBoxPath, std::string createdAt) : id(id), name(name),
-                                                                                           surname(surname),
-                                                                                           mailBoxPath(mailBoxPath),
-                                                                                           createdAt(createdAt){};
+    User(const std::string&  id, const std::string& name, const std::string& surname, const std::string& mailBoxPath, const std::string& createdAt) : id(id),
+                                                                                                                                                name(name),
+                                                                                                                                                surname(surname),
+                                                                                                                                                mailBoxPath(mailBoxPath),
+                                                                                                                                                createdAt(createdAt){};
 
-    User(std::string id, std::string name, std::string surname, std::string mailBoxPath) : id(id), name(name),
-                                                                                             surname(surname),
-                                                                                             mailBoxPath(mailBoxPath){
+    User(const std::string&  id, const std::string& name, const std::string& surname, const std::string& mailBoxPath) : id(id), name(name),
+                                                                                                                         surname(surname),
+                                                                                                                         mailBoxPath(mailBoxPath){
         time_t now = time(nullptr);
         createdAt = std::to_string(now);
     };
