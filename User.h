@@ -20,6 +20,8 @@ public:
                                                                                              surname(surname),
                                                                                              mailBoxPath(mailBoxPath){};
 
+    User():User("alphanumericId", "nameFixture", "surnameFixture", "alphanumericMailBoxPath.txt"){};
+
     const std::string &getId() const;
 
     void setId(const std::string &id);
