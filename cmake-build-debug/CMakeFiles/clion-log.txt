@@ -1,4 +1,0 @@
-/opt/JetBrains/clion-2022.2.3/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/opt/JetBrains/clion-2022.2.3/bin/ninja/linux/ninja -G Ninja -S /home/ale/CLionProjects/PalanoChatUtenti -B /home/ale/CLionProjects/PalanoChatUtenti/cmake-build-debug
--- Configuring done
--- Generating done
--- Build files have been written to: /home/ale/CLionProjects/PalanoChatUtenti/cmake-build-debug
