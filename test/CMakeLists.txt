@@ -4,6 +4,6 @@ add_subdirectory(./lib/googletest)
 set(gtest_SOURCE_DIR, ./lib/googletest/)
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
-set(TEST_SOURCE_FILES runAllTests.cpp UserFixture.cpp )
+set(TEST_SOURCE_FILES runAllTests.cpp UserFixture.cpp UserRegistryFixture.cpp )
 add_executable(runUnitTests ${TEST_SOURCE_FILES})
 target_link_libraries(runUnitTests gtest gtest_main core)
