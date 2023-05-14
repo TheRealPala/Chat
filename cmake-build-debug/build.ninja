@@ -87,6 +87,12 @@ build CMakeFiles/core.dir/User.cpp.o: CXX_COMPILER__core_Debug /home/ale/CLionPr
   OBJECT_DIR = CMakeFiles/core.dir
   OBJECT_FILE_DIR = CMakeFiles/core.dir
 
+build CMakeFiles/core.dir/UserRegistry.cpp.o: CXX_COMPILER__core_Debug /home/ale/CLionProjects/PalanoChatUtenti/UserRegistry.cpp || cmake_object_order_depends_target_core
+  DEP_FILE = CMakeFiles/core.dir/UserRegistry.cpp.o.d
+  FLAGS = -g
+  OBJECT_DIR = CMakeFiles/core.dir
+  OBJECT_FILE_DIR = CMakeFiles/core.dir
+
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target core
@@ -95,7 +101,7 @@ build CMakeFiles/core.dir/User.cpp.o: CXX_COMPILER__core_Debug /home/ale/CLionPr
 #############################################
 # Link the static library libcore.a
 
-build libcore.a: CXX_STATIC_LIBRARY_LINKER__core_Debug CMakeFiles/core.dir/User.cpp.o
+build libcore.a: CXX_STATIC_LIBRARY_LINKER__core_Debug CMakeFiles/core.dir/User.cpp.o CMakeFiles/core.dir/UserRegistry.cpp.o
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = CMakeFiles/core.dir
   POST_BUILD = :

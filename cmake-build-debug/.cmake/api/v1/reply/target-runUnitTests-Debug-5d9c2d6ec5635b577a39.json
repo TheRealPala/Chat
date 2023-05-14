@@ -85,15 +85,15 @@
 	[
 		{
 			"backtrace" : 2,
-			"id" : "core::@6890427a1f51a3e7e1df"
-		},
-		{
-			"backtrace" : 2,
 			"id" : "gtest::@838963ba4e42fda1c95a"
 		},
 		{
 			"backtrace" : 2,
 			"id" : "gtest_main::@838963ba4e42fda1c95a"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "core::@6890427a1f51a3e7e1df"
 		}
 	],
 	"id" : "runUnitTests::@36f028580bb02cc8272a",
