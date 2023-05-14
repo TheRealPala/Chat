@@ -26,12 +26,12 @@ public:
                                                                                              surname(surname),
                                                                                              mailBoxPath(mailBoxPath){
         time_t now = time(0);
-        createdAt = ctime(&now);
+        createdAt = std::to_string(now);
     };
 
     User():User("alphanumericId", "nameFixture", "surnameFixture", "alphanumericMailBoxPath.txt"){
         time_t now = time(0);
-        createdAt = ctime(&now);
+        createdAt = std::to_string(now);
     };
 
     const std::string &getId() const;
@@ -51,6 +51,10 @@ public:
     void setMailBoxPath(const std::string &mailBoxPath);
 
     void toString() const;
+
+    const std::string &getCreatedAt() const;
+
+    void setCreatedAt(const std::string &createdAt);
 };
 
 
