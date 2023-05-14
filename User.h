@@ -16,6 +16,10 @@ private:
     std::string mailBoxPath;
 
 public:
+    User(std::string id, std::string name, std::string surname, std::string mailBoxPath) : id(id), name(name),
+                                                                                             surname(surname),
+                                                                                             mailBoxPath(mailBoxPath){};
+
     const std::string &getId() const;
 
     void setId(const std::string &id);
