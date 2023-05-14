@@ -51,3 +51,15 @@ void User::toString() const {
               std::ctime(&date) << std::endl;
 
 }
+
+bool User::operator==(const User &rhs) const {
+    return id == rhs.id &&
+           name == rhs.name &&
+           surname == rhs.surname &&
+           mailBoxPath == rhs.mailBoxPath &&
+           createdAt == rhs.createdAt;
+}
+
+bool User::operator!=(const User &rhs) const {
+    return !(rhs == *this);
+}

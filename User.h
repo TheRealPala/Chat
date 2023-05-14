@@ -34,6 +34,10 @@ public:
         createdAt = std::to_string(now);
     };
 
+    bool operator==(const User &rhs) const;
+
+    bool operator!=(const User &rhs) const;
+
     const std::string &getId() const;
 
     void setId(const std::string &id);
