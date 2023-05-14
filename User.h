@@ -25,12 +25,12 @@ public:
     User(std::string id, std::string name, std::string surname, std::string mailBoxPath) : id(id), name(name),
                                                                                              surname(surname),
                                                                                              mailBoxPath(mailBoxPath){
-        time_t now = time(0);
+        time_t now = time(nullptr);
         createdAt = std::to_string(now);
     };
 
     User():User("alphanumericId", "nameFixture", "surnameFixture", "alphanumericMailBoxPath.txt"){
-        time_t now = time(0);
+        time_t now = time(nullptr);
         createdAt = std::to_string(now);
     };
 
