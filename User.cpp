@@ -46,6 +46,8 @@ void User::setMailBoxPath(const std::string &mailBoxPath) {
 }
 
 void User::toString() const {
-    std::cout << "Id: " << id << "\nName: " << name << "\nSurname: " << surname << "\nMailBox Path: " << mailBoxPath << "\nCreatedAt: " << createdAt << std::endl;
+    time_t date = atol(createdAt.c_str());
+    std::cout << "Id: " << id << "\nName: " << name << "\nSurname: " << surname << "\nMailBox Path: " << mailBoxPath << "\nCreatedAt: " <<
+              std::ctime(&date) << std::endl;
 
 }
