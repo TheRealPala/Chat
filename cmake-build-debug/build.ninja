@@ -148,6 +148,13 @@ build test/CMakeFiles/runUnitTests.dir/runAllTests.cpp.o: CXX_COMPILER__runUnitT
   OBJECT_DIR = test/CMakeFiles/runUnitTests.dir
   OBJECT_FILE_DIR = test/CMakeFiles/runUnitTests.dir
 
+build test/CMakeFiles/runUnitTests.dir/UserFixture.cpp.o: CXX_COMPILER__runUnitTests_Debug /home/ale/CLionProjects/PalanoChatUtenti/test/UserFixture.cpp || cmake_object_order_depends_target_runUnitTests
+  DEP_FILE = test/CMakeFiles/runUnitTests.dir/UserFixture.cpp.o.d
+  FLAGS = -g
+  INCLUDES = -isystem /home/ale/CLionProjects/PalanoChatUtenti/test/lib/googletest/include -isystem /home/ale/CLionProjects/PalanoChatUtenti/test/lib/googletest
+  OBJECT_DIR = test/CMakeFiles/runUnitTests.dir
+  OBJECT_FILE_DIR = test/CMakeFiles/runUnitTests.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target runUnitTests
@@ -156,7 +163,7 @@ build test/CMakeFiles/runUnitTests.dir/runAllTests.cpp.o: CXX_COMPILER__runUnitT
 #############################################
 # Link the executable test/runUnitTests
 
-build test/runUnitTests: CXX_EXECUTABLE_LINKER__runUnitTests_Debug test/CMakeFiles/runUnitTests.dir/runAllTests.cpp.o | lib/libgtest.a lib/libgtest_main.a libcore.a lib/libgtest.a || lib/libgtest.a lib/libgtest_main.a libcore.a
+build test/runUnitTests: CXX_EXECUTABLE_LINKER__runUnitTests_Debug test/CMakeFiles/runUnitTests.dir/runAllTests.cpp.o test/CMakeFiles/runUnitTests.dir/UserFixture.cpp.o | lib/libgtest.a lib/libgtest_main.a libcore.a lib/libgtest.a || lib/libgtest.a lib/libgtest_main.a libcore.a
   FLAGS = -g
   LINK_LIBRARIES = lib/libgtest.a  lib/libgtest_main.a  libcore.a  lib/libgtest.a
   OBJECT_DIR = test/CMakeFiles/runUnitTests.dir
