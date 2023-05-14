@@ -35,7 +35,7 @@ void UserRegistry::initRegistry() {
              f.open(this->UserRegistryPath.c_str(), std::ios::out);
          }
          if(this->isEmpty()){
-             f << "#id_nome_cognome_pathMailBox\n";
+             f << "#id_nome_cognome_pathMailBox_createdAt\n";
          }
          f.close();
 }
@@ -50,7 +50,7 @@ std::vector<User>& UserRegistry::getAllUsers() const {
             continue;
         }
         std::vector<std::string> splittedLine = strExplode(line, '_');
-        users->push_back(User(splittedLine[0], splittedLine[1], splittedLine[2], splittedLine[3]));
+        users->push_back(User(splittedLine[0], splittedLine[1], splittedLine[2], splittedLine[3], splittedLine[4]));
     }
     return *users;
 }

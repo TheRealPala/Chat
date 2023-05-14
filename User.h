@@ -5,7 +5,7 @@
 #ifndef PALANOCHATUTENTI_USER_H
 #define PALANOCHATUTENTI_USER_H
 
-
+#include <ctime>
 #include <string>
 
 class User {
@@ -14,13 +14,25 @@ private:
     std::string name;
     std::string surname;
     std::string mailBoxPath;
+    std::string createdAt;
 
 public:
+    User(std::string id, std::string name, std::string surname, std::string mailBoxPath, std::string createdAt) : id(id), name(name),
+                                                                                           surname(surname),
+                                                                                           mailBoxPath(mailBoxPath),
+                                                                                           createdAt(createdAt){};
+
     User(std::string id, std::string name, std::string surname, std::string mailBoxPath) : id(id), name(name),
                                                                                              surname(surname),
-                                                                                             mailBoxPath(mailBoxPath){};
+                                                                                             mailBoxPath(mailBoxPath){
+        time_t now = time(0);
+        createdAt = ctime(&now);
+    };
 
-    User():User("alphanumericId", "nameFixture", "surnameFixture", "alphanumericMailBoxPath.txt"){};
+    User():User("alphanumericId", "nameFixture", "surnameFixture", "alphanumericMailBoxPath.txt"){
+        time_t now = time(0);
+        createdAt = ctime(&now);
+    };
 
     const std::string &getId() const;
 

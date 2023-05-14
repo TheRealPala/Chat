@@ -38,6 +38,6 @@ void User::setMailBoxPath(const std::string &mailBoxPath) {
 }
 
 void User::toString() const {
-    std::cout << "Id: " << id << "\nName: " << name << "\nSurname: " << surname << "\nMailBox Path: " << mailBoxPath << std::endl;
+    std::cout << "Id: " << id << "\nName: " << name << "\nSurname: " << surname << "\nMailBox Path: " << mailBoxPath << "\nCreatedAt:" << createdAt << std::endl;
 
 }
