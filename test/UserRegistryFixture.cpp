@@ -8,13 +8,20 @@ class UserRegistrySuite : public ::testing::Test {
 
 protected:
     virtual void SetUp() {
+        blankFile();
     }
-    virtual void tearDown() {
+    virtual void TearDown() {
+      blankFile();
+      deleteTxtFile(baseUser.getMailBoxPath());
+    }
+    void blankFile(){
         std::string path = "config/userRegistry.txt";
-        std::fstream f;
-        f.open(path);
+        std::ofstream f(path);
         f << "#id_nome_cognome_pathMailBox_createdAt\n";
         f.close();
+    }
+    void deleteTxtFile(std::string path){
+        std::remove(path.c_str());
     }
     User baseUser;
     User readUser;
