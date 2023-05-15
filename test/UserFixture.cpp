@@ -14,12 +14,14 @@ protected:
 
 
 TEST_F(UserSuite, Costructor){
-
-
-    ASSERT_EQ("alphanumericId", ChatUser.getId());
+    time_t now = time(nullptr);
+    std::string createdAtBase = std::to_string(now);
+    ChatUser.setCreatedAt(createdAtBase);
+    std::string hash = ChatUser.toHash();
+    ASSERT_EQ(hash, ChatUser.getId());
     ASSERT_EQ("nameFixture", ChatUser.getName());
     ASSERT_EQ("surnameFixture", ChatUser.getSurname());
-    ASSERT_EQ("alphanumericMailBoxPath.txt", ChatUser.getMailBoxPath());
+    ASSERT_EQ("config/" + hash +".txt", ChatUser.getMailBoxPath());
 
 }
 
