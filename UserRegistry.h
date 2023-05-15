@@ -13,6 +13,7 @@ class UserRegistry {
 private:
     std::string UserRegistryPath;
     void initRegistry();
+    void createPersonalMailBox(const User& user) const;
 public:
     explicit UserRegistry(const std::string& UserRegistryPath = "config/userRegistry.txt");
     bool addUser(const User& user) const ;

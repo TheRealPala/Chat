@@ -5,17 +5,11 @@
 #include "UserRegistry.h"
 #include "fstream"
 #include <filesystem>
+#include "txtHandleFunctions.h"
 
-const std::vector<std::string> strExplode(std::string s, char del)
-{
-    std::stringstream ss(s);
-    std::string word;
-    std::vector<std::string> *tokens = new std::vector<std::string>();
-    while (!ss.eof()) {
-        getline(ss, word, del);
-        tokens->push_back(word);
-    }
-    return *tokens;
+
+bool UserRegistry::isEmpty() const{
+    return isTxtFileEmpty(this->UserRegistryPath);
 }
 
 
@@ -24,20 +18,8 @@ UserRegistry::UserRegistry(const std::string& UserRegistryPath):UserRegistryPath
 };
 
 
-bool UserRegistry::isEmpty() const{
-    return std::filesystem::is_empty(this->UserRegistryPath);
-}
-
-
 void UserRegistry::initRegistry() {
-        std::fstream f(this->UserRegistryPath.c_str());
-         if(!f.good()){ // se il file non esiste, lo creo
-             f.open(this->UserRegistryPath.c_str(), std::ios::out);
-         }
-         if(this->isEmpty()){
-             f << "#id_nome_cognome_pathMailBox_createdAt\n";
-         }
-         f.close();
+        createTxtFile(this->UserRegistryPath.c_str(), "#id_nome_cognome_pathMailBox_createdAt\n");
 }
 
 
@@ -55,6 +37,7 @@ std::vector<User>& UserRegistry::getAllUsers() const {
     return *users;
 }
 bool UserRegistry::addUser(const User& user) const {
+    //add user to the registry
     std::fstream f(this->UserRegistryPath.c_str(), std::ios::app);
     if(!f.good()){
         return false;
@@ -62,4 +45,5 @@ bool UserRegistry::addUser(const User& user) const {
     f << user.getId() << "_" << user.getName() << "_" << user.getSurname() << "_" << user.getMailBoxPath() << "_" << user.getCreatedAt() << "\n";
     f.close();
     return true;
+
 }
