@@ -13,14 +13,14 @@ class Message {
     std::string id_to;
     std::string text;
     std::string createdAt;
+    bool read;
 public:
      Message(const std::string &idFrom, const std::string &idTo, const std::string &text, const std::string &createdAt): id_from(idFrom),
                                                                                                                                     id_to(idTo),
                                                                                                                                     text(text),
-                                                                                                                                    createdAt(createdAt){};
+                                                                                                                                    createdAt(createdAt), read(false){};
      Message(const std::string &idFrom, const std::string &idTo, const std::string &text): id_from(idFrom),
-                                                                                           id_to(idTo),
-                                                                                           text(text){
+                                                                                           id_to(idTo),text(text), read(false){
          time_t now = time(nullptr);
          createdAt = std::to_string(now);
      };
@@ -60,7 +60,7 @@ public:
     void setCreatedAt(const std::string &createdAt) {
         Message::createdAt = createdAt;
     }
-
+    std::string toHash() const;
     bool operator==(const Message &rhs) const {
         return id_from == rhs.id_from &&
                id_to == rhs.id_to &&
