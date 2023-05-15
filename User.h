@@ -34,7 +34,7 @@ public:
         time_t now = time(nullptr);
         createdAt = std::to_string(now);
         id = this->toHash();
-        mailBoxPath = this->id + ".txt";
+        mailBoxPath = "config/" + this->id + ".txt";
     }
 
     User():User("nameFixture", "surnameFixture"){};
