@@ -53,13 +53,14 @@ void User::toString() const {
 }
 
 bool User::operator==(const User &rhs) const {
-    return id == rhs.id &&
-           name == rhs.name &&
-           surname == rhs.surname &&
-           mailBoxPath == rhs.mailBoxPath &&
-           createdAt == rhs.createdAt;
+    return (this->toHash() == rhs.toHash());
 }
 
 bool User::operator!=(const User &rhs) const {
     return !(rhs == *this);
+}
+
+std::string User::toHash() const {
+
+    return std::to_string(std::hash<std::string>{}(this->name+this->surname+this->createdAt));
 }

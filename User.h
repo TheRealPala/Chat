@@ -30,10 +30,14 @@ public:
         createdAt = std::to_string(now);
     };
 
-    User():User("alphanumericId", "nameFixture", "surnameFixture", "alphanumericMailBoxPath.txt"){
+    User(const std::string& name, const std::string& surname):name(name), surname(surname){
         time_t now = time(nullptr);
         createdAt = std::to_string(now);
-    };
+        id = this->toHash();
+        mailBoxPath = this->id + ".txt";
+    }
+
+    User():User("nameFixture", "surnameFixture"){};
 
     bool operator==(const User &rhs) const;
 
@@ -60,6 +64,8 @@ public:
     const std::string &getCreatedAt() const;
 
     void setCreatedAt(const std::string &createdAt);
+
+    std::string toHash() const;
 };
 
 
