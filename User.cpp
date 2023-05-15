@@ -38,16 +38,16 @@ void User::setSurname(const std::string &surname) {
 }
 
 const std::string &User::getMailBoxPath() const {
-    return mailBoxPath;
+    return messBoxPath;
 }
 
 void User::setMailBoxPath(const std::string &mailBoxPath) {
-    User::mailBoxPath = mailBoxPath;
+    User::messBoxPath = mailBoxPath;
 }
 
 void User::toString() const {
     time_t date = atol(createdAt.c_str());
-    std::cout << "Id: " << id << "\nName: " << name << "\nSurname: " << surname << "\nMailBox Path: " << mailBoxPath << "\nCreatedAt: " <<
+    std::cout << "Id: " << id << "\nName: " << name << "\nSurname: " << surname << "\nMailBox Path: " << messBoxPath << "\nCreatedAt: " <<
               std::ctime(&date) << std::endl;
 
 }

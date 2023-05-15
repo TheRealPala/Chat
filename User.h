@@ -7,34 +7,42 @@
 
 #include <ctime>
 #include <string>
+#include "MessageBox.h"
 
 class User {
 private:
     std::string id;
     std::string name;
     std::string surname;
-    std::string mailBoxPath;
+    std::string messBoxPath;
     std::string createdAt;
+    MessageBox messBox;
 
 public:
     User(const std::string&  id, const std::string& name, const std::string& surname, const std::string& mailBoxPath, const std::string& createdAt) : id(id),
-                                                                                                                                                name(name),
-                                                                                                                                                surname(surname),
-                                                                                                                                                mailBoxPath(mailBoxPath),
-                                                                                                                                                createdAt(createdAt){};
+                                                                                                                                                      name(name),
+                                                                                                                                                      surname(surname),
+                                                                                                                                                      messBoxPath(mailBoxPath),
+                                                                                                                                                      createdAt(createdAt),
+                                                                                                                                                      messBox(messBoxPath){};
 
     User(const std::string&  id, const std::string& name, const std::string& surname, const std::string& mailBoxPath) : id(id), name(name),
-                                                                                                                         surname(surname),
-                                                                                                                         mailBoxPath(mailBoxPath){
+                                                                                                                        surname(surname),
+                                                                                                                        messBoxPath(mailBoxPath),
+                                                                                                                        messBox(messBoxPath){
         time_t now = time(nullptr);
         createdAt = std::to_string(now);
     };
 
-    User(const std::string& name, const std::string& surname):name(name), surname(surname){
+    User(const std::string& name, const std::string& surname){
+        this->name = name;
+        this->surname = surname;
         time_t now = time(nullptr);
         createdAt = std::to_string(now);
         id = this->toHash();
-        mailBoxPath = "config/" + this->id + ".txt";
+        messBoxPath = "config/" + this->id + ".txt";
+        this->messBox = MessageBox(messBoxPath);
+        messBox.persistMessageBox();
     }
 
     User():User("nameFixture", "surnameFixture"){};
