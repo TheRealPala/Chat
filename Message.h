@@ -59,10 +59,7 @@ public:
     }
     std::string toHash() const;
     bool operator==(const Message &rhs) const {
-        return id_from == rhs.id_from &&
-               id_to == rhs.id_to &&
-               text == rhs.text &&
-               createdAt == rhs.createdAt;
+        return this->toHash() == rhs.toHash();
     }
 
 };
