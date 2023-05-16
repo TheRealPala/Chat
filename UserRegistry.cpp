@@ -20,12 +20,12 @@ UserRegistry::UserRegistry(const std::string& UserRegistryPath):UserRegistryPath
 
 void UserRegistry::initRegistry() {
         createTxtFile(this->UserRegistryPath.c_str(), "#id_nome_cognome_pathMailBox_createdAt\n");
+        users = new std::vector<User>();
 }
 
 
-std::vector<User>& UserRegistry::getAllUsers() const {
+void UserRegistry::updateUsers() const {
     std::fstream f(this->UserRegistryPath.c_str(), std::ios::in);
-    std::vector<User> *users = new std::vector<User>();
     std::string line;
     while (std::getline(f, line)) {
         if (line[0] == '#' || line.empty()) {
@@ -34,8 +34,9 @@ std::vector<User>& UserRegistry::getAllUsers() const {
         std::vector<std::string> splittedLine = strExplode(line, '_');
         users->push_back(User(splittedLine[0], splittedLine[1], splittedLine[2], splittedLine[3], splittedLine[4]));
     }
-    return *users;
 }
+
+
 bool UserRegistry::addUser(const User& user) const {
     //add user to the registry
     std::fstream f(this->UserRegistryPath.c_str(), std::ios::app);
@@ -44,6 +45,20 @@ bool UserRegistry::addUser(const User& user) const {
     }
     f << user.getId() << "_" << user.getName() << "_" << user.getSurname() << "_" << user.getMailBoxPath() << "_" << user.getCreatedAt() << "\n";
     f.close();
+    updateUsers();
     return true;
+}
 
+const User& UserRegistry::getUserById(const std::string& id) const {
+    for (auto &user : *users) {
+        if (user.getId() == id) {
+            return user;
+        }
+    }
+    throw std::invalid_argument("User not found");
+
+}
+
+const std::vector<User>& UserRegistry::getAllUsers() const {
+    return *users;
 }

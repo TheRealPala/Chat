@@ -14,7 +14,11 @@ private:
     std::string UserRegistryPath;
     void initRegistry();
     void createPersonalMailBox(const User& user) const;
+    std::vector<User> *users;
 public:
+    ~UserRegistry(){
+        delete users;
+    }
     explicit UserRegistry(const std::string& UserRegistryPath = "config/userRegistry.txt");
     bool addUser(const User& user) const ;
     bool removeUser(const User& user) const ;
@@ -22,9 +26,11 @@ public:
     bool findUser(const User &user) const;
     bool findUser(const std::string& id) const;
     bool isEmpty() const;
-    std::vector<User>& getAllUsers() const;
+    const std::vector<User>& getAllUsers() const;
+    const User& getUserById(const std::string& id) const;
 
 
+    void updateUsers() const;
 };
 
 
