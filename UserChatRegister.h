@@ -12,6 +12,7 @@
 class UserChatRegister {
 private:
     User user;
+public:
     UserChatRegister(const User& user):user(user){};
     Chat getMessagesSentWith(const User& user) const;
     std::vector<Chat>getAllMessagesSent(const std::vector<User>& users) const;
