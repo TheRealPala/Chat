@@ -64,3 +64,37 @@ std::string User::toHash() const {
 
     return std::to_string(std::hash<std::string>{}(this->name+this->surname+this->createdAt));
 }
+
+void User::sendMessage(const Message &m, const User &re) {
+    re.messBox.addMessage(m);
+}
+
+
+void User::sendMessage(const std::string &text, const User &re) {
+    Message m(this->id, re.getId(), text);
+    re.messBox.addMessage(m);
+}
+
+void User::sendMessage(const Message &m, const MessageBox &messageBox) {
+    messageBox.addMessage(m);
+}
+
+const std::string &User::getMessBoxPath() const {
+    return messBoxPath;
+}
+
+void User::setMessBoxPath(const std::string &messBoxPath) {
+    User::messBoxPath = messBoxPath;
+}
+
+const MessageBox &User::getMessBox() const {
+    return messBox;
+}
+
+void User::setMessBox(const MessageBox &messBox) {
+    User::messBox = messBox;
+}
+
+const std::vector<Message> User::getMessages() const {
+    return this->messBox.getAllMessages();
+}
