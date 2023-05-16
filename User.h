@@ -72,7 +72,7 @@ public:
 
     void setMailBoxPath(const std::string &mailBoxPath);
 
-    void toString() const;
+    const std::string toString() const;
 
     const std::string &getCreatedAt() const;
 
@@ -87,6 +87,8 @@ public:
     void sendMessage(const std::string &m, const User &receiver);
 
     const std::vector<Message> getMessages() const;
+
+    const void printUser() const;
 };
 
 

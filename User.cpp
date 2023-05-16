@@ -45,11 +45,14 @@ void User::setMailBoxPath(const std::string &mailBoxPath) {
     User::messBoxPath = mailBoxPath;
 }
 
-void User::toString() const {
+const std::string User::toString() const {
     time_t date = atol(createdAt.c_str());
-    std::cout << "Id: " << id << "\nName: " << name << "\nSurname: " << surname << "\nMailBox Path: " << messBoxPath << "\nCreatedAt: " <<
-              std::ctime(&date) << std::endl;
+    return "Id: " + id + "\nName: " + name + "\nSurname: " + surname + "\nMailBox Path: " + messBoxPath + "\nCreatedAt: " +
+              std::ctime(&date);
+}
 
+const void User::printUser() const {
+    std::cout << this->toString();
 }
 
 bool User::operator==(const User &rhs) const {
