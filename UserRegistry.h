@@ -28,6 +28,9 @@ public:
     bool isEmpty() const;
     const std::vector<User>& getAllUsers() const;
     const User& getUserById(const std::string& id) const;
+    const User& getUserByIndex(const int index) const {
+        return users->at(index);
+    }
 
 
     void updateUsers() const;

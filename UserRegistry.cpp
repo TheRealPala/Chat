@@ -21,6 +21,7 @@ UserRegistry::UserRegistry(const std::string& UserRegistryPath):UserRegistryPath
 void UserRegistry::initRegistry() {
         createTxtFile(this->UserRegistryPath.c_str(), "#id_nome_cognome_pathMailBox_createdAt\n");
         users = new std::vector<User>();
+        updateUsers();
 }
 
 
