@@ -9,19 +9,25 @@
 #include <string>
 #include "Message.h"
 #include "txtHandleFunctions.h"
+
 class MessageBox {
 private:
     std::string path;
+    std::string ownerId;
+
 public:
-    MessageBox(const std::string& path="CHANGE_ME_defaultMessageBoxPath"):path(path){}
+    MessageBox(const std::string& path="CHANGE_ME_defaultMessageBoxPath", const std::string& ownerId="0"):path(path), ownerId(ownerId){}
 
     const std::string &getPath() const;
 
     void setPath(const std::string &path);
 
-    bool sendMessage(const Message& m);
     bool isEmpty() const;
     void persistMessageBox() const;
+    void addMessage(const Message& message) const;
+    const std::vector<Message> getAllMessages() const;
+    const std::string& getOwnerId() const;
+    void setOwner(const std::string &owner);
 };
 
 
