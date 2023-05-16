@@ -19,6 +19,8 @@ public:
     Chat(const User &userSender, const User &userReceiver) : userSender(userSender), userReceiver(userReceiver) {
         generateChat();
     }
+    Chat(const User &userSender, const User &userReceiver, const std::vector<Message> &chat) : userSender(userSender), userReceiver(userReceiver), chat(chat) {}
+
     void generateChat();
 
     const User &getUserSender() const;
