@@ -54,6 +54,10 @@ void Chat::setChat(const std::vector<Message> &chat) {
 }
 
 void Chat::printChat() const {
+    if(chat.empty()) {
+        std::cout << "Non ci sono messaggi da visualizzare!" << std::endl;
+        return;
+    }
     for(auto m: chat) {
         std::string from = m.getIdFrom() == userSender.getId() ? userSender.getName() : userReceiver.getName();
         std::cout << from << ": " << m.getText() << std::endl;
