@@ -17,6 +17,10 @@ UserRegistry::UserRegistry(const std::string& UserRegistryPath):UserRegistryPath
     initRegistry();
 };
 
+bool UserRegistry::enoughUsersToChat() const {
+    return users->size() >= 2;
+}
+
 
 void UserRegistry::initRegistry() {
         createTxtFile(this->UserRegistryPath.c_str(), "#id_nome_cognome_pathMailBox_createdAt\n");

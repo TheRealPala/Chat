@@ -34,6 +34,8 @@ public:
 
 
     void updateUsers() const;
+
+    bool enoughUsersToChat() const;
 };
 
 
