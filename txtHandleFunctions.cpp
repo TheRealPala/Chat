@@ -3,6 +3,7 @@
 //
 //functions to use txt files
 #include "txtHandleFunctions.h"
+#include "User.h"
 
 const std::vector<std::string> strExplode(std::string s, char del)
 {
@@ -31,5 +32,9 @@ void createTxtFile(const std::string& path, const std::string& initString){
         f << initString;
     }
     f.close();
+}
+
+bool removeUserFromFile(const std::string& idUserToRemove, const std::string& path ){
+//TODO: IMPLEMENT THIS METHOD, FINISH CRUD ON THE USER, UPDATE MENU, UNIT TEST
 }
 //function to use txt files

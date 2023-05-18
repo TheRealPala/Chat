@@ -56,13 +56,14 @@ int getArrayElementIndexEx(const int maxSize, const int minSize = 0,
 }
 
 
-int getfromStdinUserIndex(const UserRegistry& users, const std::string& message=""){
+int getfromStdinUserIndex(const UserRegistry& users, const std::string& outputMessage="",
+                          const std::string& inputMessage = "Inserisci il numero dell'utente che vuoi utlizzare: "){
     bool loop;
     int index;
     do {
         loop = false;
-        if(message != "")
-            std::cout << message << std::endl;
+        if(outputMessage != "")
+            std::cout << outputMessage << std::endl;
         int count = 0;
         for (auto u: users.getAllUsers()) {
             std::cout << ++count << ") " << std::endl;
@@ -70,7 +71,7 @@ int getfromStdinUserIndex(const UserRegistry& users, const std::string& message=
             std::cout << std::endl;
         }
         try {
-            index = getArrayElementIndexEx(users.getAllUsers().size(), 0, "Inserisci il numero dell'utente che vuoi utlizzare: ");
+            index = getArrayElementIndexEx(users.getAllUsers().size(), 0, inputMessage);
         } catch (std::exception &e) {
             loop = true;
             std::cout << e.what() << std::endl;
@@ -154,6 +155,11 @@ void addUser(UserRegistry& userRegistry){
     std::cin >> surname;
     userRegistry.addUser(User(name, surname));
     std::cout << "Utente aggiunto correttamente!" << std::endl;
+}
+
+void removeUser(UserRegistry& userRegistry){
+    int index = getfromStdinUserIndex(userRegistry, "Lista utenti:", "Inserisci il numero dell'utente che vuoi eliminare");
+    userRegistry.removeUser(userRegistry.getUserByIndex(index));
 }
 
 void printDivider(){

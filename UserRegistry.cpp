@@ -6,6 +6,7 @@
 #include "fstream"
 #include <filesystem>
 #include "txtHandleFunctions.h"
+#include "CuiWrapper.h"
 
 
 bool UserRegistry::isEmpty() const{
@@ -21,6 +22,9 @@ bool UserRegistry::enoughUsersToChat() const {
     return users->size() >= 2;
 }
 
+bool UserRegistry::removeUser(const User& user){
+    return removeUserFromFile(user.getId(), this->UserRegistryPath);
+}
 
 void UserRegistry::initRegistry() {
         createTxtFile(this->UserRegistryPath.c_str(), "#id_nome_cognome_pathMailBox_createdAt\n");
@@ -29,7 +33,7 @@ void UserRegistry::initRegistry() {
 }
 
 
-void UserRegistry::updateUsers() const {
+void UserRegistry::updateUsers()  {
     std::fstream f(this->UserRegistryPath.c_str(), std::ios::in);
     std::string line;
     while (std::getline(f, line)) {
@@ -42,7 +46,7 @@ void UserRegistry::updateUsers() const {
 }
 
 
-bool UserRegistry::addUser(const User& user) const {
+bool UserRegistry::addUser(const User& user){
     //add user to the registry
     std::fstream f(this->UserRegistryPath.c_str(), std::ios::app);
     if(!f.good()){

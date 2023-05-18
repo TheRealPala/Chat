@@ -13,15 +13,14 @@ class UserRegistry {
 private:
     std::string UserRegistryPath;
     void initRegistry();
-    void createPersonalMailBox(const User& user) const;
     std::vector<User> *users;
 public:
     ~UserRegistry(){
         delete users;
     }
     explicit UserRegistry(const std::string& UserRegistryPath = "config/userRegistry.txt");
-    bool addUser(const User& user) const ;
-    bool removeUser(const User& user) const ;
+    bool addUser(const User& user);
+    bool removeUser(const User& user);
     bool removeUser(const std::string& id) const ;
     bool findUser(const User &user) const;
     bool findUser(const std::string& id) const;
@@ -33,9 +32,14 @@ public:
     }
 
 
-    void updateUsers() const;
+    void updateUsers();
 
     bool enoughUsersToChat() const;
+
+    bool deleteUser(const User &u);
+
+    void removeUser();
+
 };
 
 
