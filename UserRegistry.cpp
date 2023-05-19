@@ -10,7 +10,7 @@
 
 
 bool UserRegistry::isEmpty() const{
-    return isTxtFileEmpty(this->UserRegistryPath);
+    return users->empty();
 }
 
 
@@ -22,8 +22,14 @@ bool UserRegistry::enoughUsersToChat() const {
     return users->size() >= 2;
 }
 
-bool UserRegistry::removeUser(const User& user){
-    return removeUserFromFile(user.getId(), this->UserRegistryPath);
+void UserRegistry::removeUser(const User& user){
+    if(!isEmpty()) {
+        removeUserFromFile(user.getId(), this->UserRegistryPath);
+        updateUsers();
+    }
+    else{
+        std::cout << "Impossibile eliminare un utente! Il registro è vuoto!" << std::endl;
+    }
 }
 
 void UserRegistry::initRegistry() {
@@ -36,12 +42,14 @@ void UserRegistry::initRegistry() {
 void UserRegistry::updateUsers()  {
     std::fstream f(this->UserRegistryPath.c_str(), std::ios::in);
     std::string line;
+    users->clear();
     while (std::getline(f, line)) {
         if (line[0] == '#' || line.empty()) {
             continue;
         }
         std::vector<std::string> splittedLine = strExplode(line, '_');
-        users->push_back(User(splittedLine[0], splittedLine[1], splittedLine[2], splittedLine[3], splittedLine[4]));
+        User u(splittedLine[0], splittedLine[1], splittedLine[2], splittedLine[3], splittedLine[4]);
+        users->push_back(u);
     }
 }
 
@@ -70,4 +78,22 @@ const User& UserRegistry::getUserById(const std::string& id) const {
 
 const std::vector<User>& UserRegistry::getAllUsers() const {
     return *users;
+}
+
+void UserRegistry::printAllUsers() const {
+    for (auto &user : *users) {
+        user.printUser();
+        std::cout << std::endl;
+    }
+}
+
+const bool UserRegistry::isUserInRegistry(const User &user) const {
+    bool found = false;
+    for (auto &u : *users) {
+        if (u == user) {
+            found = true;
+            break;
+        }
+    }
+    return found;
 }

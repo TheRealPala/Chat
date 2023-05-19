@@ -24,6 +24,7 @@ public:
 
     bool isEmpty() const;
     void persistMessageBox() const;
+    void deleteMessageBox() const;
     void addMessage(const Message& message) const;
     const std::vector<Message> getAllMessages() const;
     const std::string& getOwnerId() const;

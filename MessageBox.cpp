@@ -55,3 +55,7 @@ const std::string& MessageBox::getOwnerId() const {
 void MessageBox::setOwner(const std::string &ownerId){
     this->ownerId = ownerId;
 }
+
+void MessageBox::deleteMessageBox() const {
+    int ret = remove(this->path.c_str());
+}

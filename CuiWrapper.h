@@ -18,6 +18,9 @@ int getArrayElementIndexCheck(const int maxSize, const int minSize = 0);
 void printDivider();
 int getChatMenuChoiceFromStdin();
 int getMainMenuChoiceFromStdin();
-void subMenu(const UserRegistry& users);
+int getUserMenuChoiceFromStdin();
+void userMenu(UserRegistry& userRegistry);
+void chatMenu(const UserRegistry& userRegistry);
 void addUser(UserRegistry& userRegistry);
+void removeUser(UserRegistry& userRegistry);
 #endif //PALANOCHATUTENTI_CUIWRAPPER_H

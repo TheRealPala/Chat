@@ -1,8 +1,9 @@
 #include <iostream>
 #include <vector>
-
 #include "UserRegistry.h"
 #include "UserChatRegister.h"
+
+void showAllUsers(UserRegistry &registry);
 
 //
 // Created by ale on 16/05/23.
@@ -108,9 +109,10 @@ int getfromStdinAnotherUserIndex(const UserRegistry& users, const std::string& m
 
 int getChatMenuChoiceFromStdin(){
     for(;;) {
-        std::cout << "\nOpzioni disponibili:\n1) Cambia utente\n2) Invia messaggio"
-                     "\n3) Guarda chat con un altro utente\n4) Elenco di tutti i messaggi inviati con un altro utente"
-                     "\n5)Esci" << std::endl;
+        std::cout << "---USER MENU---" << std::endl;
+        std::cout << "Opzioni disponibili:\n1) Cambia utente\n2) Invia messaggio"
+                     "\n3) Guarda chat con un altro utente\n4) Elenco di tutti i messaggi inviati ad un altro utente"
+                     "\n5) Esci" << std::endl;
         std::string choice;
         std::cin >> choice;
         if (stringEqualsIgnoreCase(choice, "cambia utente") || choice == "1") {
@@ -132,15 +134,36 @@ int getChatMenuChoiceFromStdin(){
 
 int getMainMenuChoiceFromStdin(){
     for(;;) {
-        std::cout << "\nOpzioni disponibili:\n1) Aggiungi utente\n2) Messaggia\n3)Esci"<< std::endl;
+        std::cout << "---MAIN MENU---" << std::endl;
+        std::cout << "Opzioni disponibili:\n1) Gestisci utenti\n2) Messaggia\n3) Esci"<< std::endl;
         std::string choice;
         std::cin >> choice;
-        if (stringEqualsIgnoreCase(choice, "aggiungi utente") || choice == "1") {
+        if (stringEqualsIgnoreCase(choice, "Gestisci Utenti") || choice == "1") {
             return 1;
         } else if (stringEqualsIgnoreCase(choice, "Messaggia") || choice == "2") {
             return 2;
         } else if (stringEqualsIgnoreCase(choice, "esci") || choice == "3") {
             return 3;
+        }else {
+            std::cout << "Scelta non valida!\nRiprova!" << std::endl;
+        }
+    }
+}
+
+int getUserMenuChoiceFromStdin(){
+    for(;;) {
+        std::cout << "---USER MENU---" << std::endl;
+        std::cout << "Opzioni disponibili:\n1) Aggiungi utente\n2) Elimina utente\n3) Stampa lista utenti\n4) Esci"<< std::endl;
+        std::string choice;
+        std::cin >> choice;
+        if (stringEqualsIgnoreCase(choice, "Aggiungi utente") || choice == "1") {
+            return 1;
+        } else if (stringEqualsIgnoreCase(choice, "Elimna Utente") || choice == "2") {
+            return 2;
+        }else if (stringEqualsIgnoreCase(choice, "Stampa lista utenti") || choice == "3") {
+            return 3;
+        } else if (stringEqualsIgnoreCase(choice, "esci") || choice == "4") {
+            return 4;
         }else {
             std::cout << "Scelta non valida!\nRiprova!" << std::endl;
         }
@@ -158,16 +181,57 @@ void addUser(UserRegistry& userRegistry){
 }
 
 void removeUser(UserRegistry& userRegistry){
-    int index = getfromStdinUserIndex(userRegistry, "Lista utenti:", "Inserisci il numero dell'utente che vuoi eliminare");
-    userRegistry.removeUser(userRegistry.getUserByIndex(index));
+    if(!userRegistry.isEmpty()) {
+        int index = getfromStdinUserIndex(userRegistry, "", "Seleziona l'utente da eliminare:");
+        User userToDelete = userRegistry.getUserByIndex(index);
+        userToDelete.getMessBox().deleteMessageBox();
+        userRegistry.removeUser(userRegistry.getUserByIndex(index));
+    }else{
+        std::cout << "Errore!\nNon ci sono utenti da eliminare!" << std::endl;
+    }
 }
 
 void printDivider(){
     std::cout << "------------------------------------------" << std::endl;
 }
 
-void subMenu(const UserRegistry& userRegistry){
-    User currentUser = userRegistry.getUserByIndex(getfromStdinUserIndex(userRegistry, "Lista Utenti: "));
+void userMenu(UserRegistry& userRegistry){
+    bool loop;
+    do {
+        loop = true;
+        printDivider();
+        int choice = getUserMenuChoiceFromStdin();
+        switch (choice) {
+            case 1: {// aggiungi utente
+                addUser(userRegistry);
+                break;
+            }
+            case 2: { //elimina utente
+                removeUser(userRegistry);
+                break;
+            }
+            case 3: { //lista utenti
+                showAllUsers(userRegistry);
+                break;
+            }
+            case 4: { // esci
+                loop = false;
+                break;
+            }
+        }
+    } while (loop);
+}
+
+void showAllUsers(UserRegistry &registry) {
+    if(registry.isEmpty())
+        std::cout << "Il registro e'vuoto!" << std::endl;
+    else
+        std::cout << "Lista utenti disponibili:" << std::endl;
+        registry.printAllUsers();
+}
+
+void chatMenu(const UserRegistry& userRegistry){
+    User currentUser = userRegistry.getUserByIndex(getfromStdinUserIndex(userRegistry, "Lista Utenti: ")); // seleziona utente
     bool loop;
     do {
         loop = true;
@@ -214,10 +278,6 @@ void subMenu(const UserRegistry& userRegistry){
             }
             case 5: { // esci
                 loop = false;
-                break;
-            }
-            default: {
-                std::cout << "Scelta non valida!" << std::endl;
                 break;
             }
         }

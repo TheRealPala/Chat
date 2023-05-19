@@ -12,14 +12,15 @@ int main() {
         loop = true;
         int choice = getMainMenuChoiceFromStdin();
         switch (choice) {
-            case 1: {// aggiungi utente
-                addUser(userRegistry);
+            case 1: {// gestisci utenti
+                userMenu(userRegistry);
+                break;
             }
             case 2: { // mesaggia
                 if(!userRegistry.enoughUsersToChat())
-                    std::cout << "Non ci sono utenti disponibili!\nAggiungi almeno due utenti per messaggiare!" << std::endl;
+                    std::cout << "Non ci sono abbastanza utenti disponibili!\nAggiungi almeno due utenti per messaggiare!" << std::endl;
                 else
-                    subMenu(userRegistry);
+                    chatMenu(userRegistry);
                 break;
             }
             case 3: {// esci
@@ -32,6 +33,5 @@ int main() {
             }
         }
     } while (loop);
-    subMenu(userRegistry);
     return 0;
 }
