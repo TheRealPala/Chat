@@ -1,6 +1,6 @@
-config/
+config/*
 cmake-build-debug/
-test/testingFixtureDir/config/
+test/testingFixtureDir/config/*
 #exception
 !config/.gitkeep
 !test/testingFixtureDir/config/.gitkeep
