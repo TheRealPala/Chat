@@ -6,14 +6,22 @@
 class UserSuite : public ::testing::Test {
 
 protected:
-    virtual void SetUp() {
+    virtual void TearDown() {
+        userA.getMessBox().deleteMessageBox();
+        userB.getMessBox().deleteMessageBox();
+        userC.getMessBox().deleteMessageBox();
     }
-
-    User ChatUser;
+    virtual void SetUp() {
+        userB.setCreatedAt(userA.getCreatedAt()); //condizione necessaria affinche' A == B
+    }
+    User userA = User("nameEQUAL", "surnameEQUAL");
+    User userB = User("nameEQUAL", "surnameEQUAL");
+    User userC = User("nameNOT_EQUAL", "surnameNOT_EQUAL");
 };
 
 
 TEST_F(UserSuite, Costructor){
+    User ChatUser("nameFixture", "surnameFixture");
     time_t now = time(nullptr);
     std::string createdAtBase = std::to_string(now);
     ChatUser.setCreatedAt(createdAtBase);
@@ -22,6 +30,28 @@ TEST_F(UserSuite, Costructor){
     ASSERT_EQ("nameFixture", ChatUser.getName());
     ASSERT_EQ("surnameFixture", ChatUser.getSurname());
     ASSERT_EQ("config/" + hash +".txt", ChatUser.getMailBoxPath());
-
+    ChatUser.getMessBox().deleteMessageBox();
 }
 
+
+TEST_F(UserSuite, hashFunction) {
+    ASSERT_EQ(userA.toHash(), userB.toHash()); //prova di uguaglianza Hash su utenti uguali
+    ASSERT_NE(userA.toHash(), userC.toHash()); //prova di disuguaglianza Hash su utenti non uguali
+}
+
+TEST_F(UserSuite, sendMessage) {
+    ASSERT_TRUE(userA.sendMessage("text", userC));
+    ASSERT_FALSE(userA.sendMessage("text", userA));
+    ASSERT_FALSE(userA.sendMessage("", userA));
+}
+TEST_F(UserSuite, getMessage) {
+    blankFile(userC.getMailBoxPath(), "#idFrom_idTo_text\n");
+    std::vector<Message> messagesSent = {Message(userA.getId(), userC.getId(), "mess1"),
+                                     Message(userB.getId(), userC.getId(), "mess2")};
+    userA.sendMessage(messagesSent.at(0).getText(), userC);
+    userB.sendMessage(messagesSent.at(1).getText(), userC);
+    std::vector<Message> messagesReceived = userC.getMessages();
+    for(int i = 0; i < messagesSent.size(); i++){
+        ASSERT_EQ(messagesSent.at(i), messagesReceived.at(i));
+    }
+}
