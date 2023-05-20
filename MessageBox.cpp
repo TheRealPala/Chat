@@ -17,6 +17,10 @@ bool MessageBox::isEmpty() const {
     return isTxtFileEmpty(this->path);
 }
 
+const void MessageBox::blankMessageBox(){
+    blankFile(this->path, "#idFrom_createdAt_read_message\n");
+}
+
 const std::string &MessageBox::getPath() const {
     return path;
 }
@@ -32,7 +36,7 @@ void MessageBox::addMessage(const Message &message) const {
     file.close();
 }
 
-const std::vector<Message> MessageBox::getAllMessages() const {
+std::vector<Message> MessageBox::getAllMessages() const {
     std::ifstream file;
     file.open(this->path);
     std::string line;
@@ -57,5 +61,5 @@ void MessageBox::setOwner(const std::string &ownerId){
 }
 
 void MessageBox::deleteMessageBox() const {
-    int ret = remove(this->path.c_str());
+    remove(this->path.c_str());
 }

@@ -26,9 +26,11 @@ public:
     void persistMessageBox() const;
     void deleteMessageBox() const;
     void addMessage(const Message& message) const;
-    const std::vector<Message> getAllMessages() const;
+    std::vector<Message> getAllMessages() const;
     const std::string& getOwnerId() const;
     void setOwner(const std::string &owner);
+
+    const void blankMessageBox();
 };
 
 
