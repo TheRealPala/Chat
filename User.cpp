@@ -31,7 +31,8 @@ const std::string &User::getMailBoxPath() const {
 
 const std::string User::toString() const {
     time_t date = atol(createdAt.c_str());
-    return "Id: " + id + "\nName: " + name + "\nSurname: " + surname + "\nMailBox Path: " + messBoxPath + "\nCreatedAt: " +
+    return "Id: " + id + "\nName: " + name + "\nSurname: " + surname + "\nMailBox Path: " + messBoxPath +
+           "\nCreatedAt: " +
            std::ctime(&date);
 }
 
@@ -49,11 +50,11 @@ bool User::operator!=(const User &rhs) const {
 
 std::string User::toHash() const {
 
-    return std::to_string(std::hash<std::string>{}(this->name+this->surname+this->createdAt));
+    return std::to_string(std::hash<std::string>{}(this->name + this->surname + this->createdAt));
 }
 
 bool User::sendMessage(const std::string &text, const User &re) {
-    if(text.empty() || re == *this){
+    if (text.empty() || re == *this) {
         return false;
     }
     Message m(this->id, re.getId(), text);
@@ -62,7 +63,7 @@ bool User::sendMessage(const std::string &text, const User &re) {
 }
 
 bool User::sendMessage(const Message &m, const User &re) {
-    if(m.getText().empty() || re == *this){
+    if (m.getText().empty() || re == *this) {
         return false;
     }
     re.messBox.addMessage(m);

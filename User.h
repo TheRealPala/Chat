@@ -20,20 +20,22 @@ private:
     MessageBox messBox;
 
 public:
-    User(const std::string&  id, const std::string& name, const std::string& surname, const std::string& mailBoxPath, const std::string& createdAt) : id(id),
-                                                                                                                                                      name(name),
-                                                                                                                                                      surname(surname),
-                                                                                                                                                      messBoxPath(mailBoxPath),
-                                                                                                                                                      createdAt(createdAt),
-                                                                                                                                                      messBox(messBoxPath, this->id){};
+    User(const std::string &id, const std::string &name, const std::string &surname, const std::string &mailBoxPath,
+         const std::string &createdAt) : id(id),
+                                         name(name),
+                                         surname(surname),
+                                         messBoxPath(mailBoxPath),
+                                         createdAt(createdAt),
+                                         messBox(messBoxPath, this->id) {};
 
     const MessageBox &getMessBox() const;
 
-    User(const std::string&  id, const std::string& name, const std::string& surname, const std::string& mailBoxPath) : id(id), name(name),
-                                                    surname(surname), messBoxPath(mailBoxPath), messBox(messBoxPath, this->id),
-                                                    createdAt(std::to_string(getCurrentUTC())){};
+    User(const std::string &id, const std::string &name, const std::string &surname, const std::string &mailBoxPath)
+            : id(id), name(name),
+              surname(surname), messBoxPath(mailBoxPath), messBox(messBoxPath, this->id),
+              createdAt(std::to_string(getCurrentUTC())) {};
 
-    User(const std::string& name, const std::string& surname){
+    User(const std::string &name, const std::string &surname) {
         this->name = name;
         this->surname = surname;
         time_t now = time(nullptr);
@@ -44,7 +46,7 @@ public:
         messBox.persistMessageBox();
     };
 
-    User():User("nameFixture", "surnameFixture"){};
+    User() : User("nameFixture", "surnameFixture") {};
 
     bool operator==(const User &rhs) const;
 

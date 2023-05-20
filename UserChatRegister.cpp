@@ -8,11 +8,11 @@
 
 Chat UserChatRegister::getMessagesSentWith(const User &user) const {
     std::vector<Message> messageSent;
-for(auto m: user.getMessages()) {
-        if(m.getIdFrom() == this->user.getId()) {
-            messageSent.push_back(m);
+    for(auto m: user.getMessages()) {
+            if(m.getIdFrom() == this->user.getId()) {
+                messageSent.push_back(m);
+            }
         }
-    }
     return Chat(this->user, user, messageSent);
 }
 

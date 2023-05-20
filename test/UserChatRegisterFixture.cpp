@@ -4,8 +4,9 @@
 #include "../UserRegister.h"
 #include "../txtHandleFunctions.h"
 #include "../Chat.h"
+#include "../UserChatRegister.h"
 
-class ChatFixture : public ::testing::Test {
+class UserChatRegisterFixture : public ::testing::Test {
 
 protected:
 
@@ -13,7 +14,7 @@ protected:
         sender.getMessBox().deleteMessageBox();
         receiver.getMessBox().deleteMessageBox();
         sender = User("sender", "sender");
-        receiver = User("receiver", "reciever");
+        receiver = User("receiver", "sender");
     }
 
     virtual void TearDown() {
@@ -25,8 +26,7 @@ protected:
     User receiver;
 };
 
-TEST_F(ChatFixture, testGenerateChat) {
-    Chat chat(sender, receiver);
+TEST_F(UserChatRegisterFixture, testGetMessagesSentWith) {
     std::vector<Message> messagesOfChat = {Message(sender.getId(), receiver.getId(), "ciao", 1),
                                            Message(receiver.getId(), sender.getId(), "ciao", 2),
                                            Message(sender.getId(), receiver.getId(), "come stai?", 3),
@@ -38,12 +38,17 @@ TEST_F(ChatFixture, testGenerateChat) {
         else
             ASSERT_TRUE(receiver.sendMessage(messagesOfChat[i], sender));
     }
-    chat.generateChat();
-    std::vector<Message> chatGenerated = chat.getChat();
-    EXPECT_EQ(chatGenerated.size(), messagesOfChat.size());
-    for(int i = 0; i < chatGenerated.size(); i++) {
-        EXPECT_EQ(chatGenerated[i], messagesOfChat[i]) << "The " << i << "th message is different";
+    UserChatRegister ucrSender(sender);
+    UserChatRegister ucrReceiver(receiver);
+    std::vector<Message> messagesSentToReceiver=  ucrSender.getMessagesSentWith(receiver).getChat();
+    std::vector<Message> messagesSentToSender = ucrReceiver.getMessagesSentWith(sender).getChat();
+    short int tmpIndexReceiver = 0;
+    short int tmpIndexSender = 0;
+    for(int i = 0; i < messagesOfChat.size(); i++) {
+        if(i % 2 == 0)
+            ASSERT_EQ(messagesOfChat[i], messagesSentToReceiver[tmpIndexReceiver++]);
+        else
+            ASSERT_EQ(messagesOfChat[i], messagesSentToSender[tmpIndexSender++]);
     }
-
 }
 
