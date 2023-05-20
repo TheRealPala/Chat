@@ -4,7 +4,7 @@
 
 #include "UserChatRegister.h"
 #include "Chat.h"
-#include "UserRegistry.h"
+#include "UserRegister.h"
 
 Chat UserChatRegister::getMessagesSentWith(const User &user) const {
     std::vector<Message> messageSent;
@@ -16,7 +16,7 @@ for(auto m: user.getMessages()) {
     return Chat(this->user, user, messageSent);
 }
 
-std::vector<Chat> UserChatRegister::getAllMessagesSent(const UserRegistry& ur) const {
+std::vector<Chat> UserChatRegister::getAllMessagesSent(const UserRegister& ur) const {
     std::vector<Chat> allMessagesSent;
     for(auto u: ur.getAllUsers()){
         allMessagesSent.push_back(getMessagesSentWith(u));

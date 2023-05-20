@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 
 #include "../User.h"
-#include "../UserRegistry.h"
+#include "../UserRegister.h"
 #include "../txtHandleFunctions.h"
 
 class UserRegistrySuite : public ::testing::Test {
@@ -21,7 +21,7 @@ protected:
     }
     User baseUser;
     User readUser;
-    UserRegistry registry;
+    UserRegister registry;
 };
 
 

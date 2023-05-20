@@ -1,9 +1,9 @@
 #include <iostream>
 #include <vector>
-#include "UserRegistry.h"
+#include "UserRegister.h"
 #include "UserChatRegister.h"
 
-void showAllUsers(UserRegistry &registry);
+void showAllUsers(UserRegister &registry);
 
 //
 // Created by ale on 16/05/23.
@@ -57,7 +57,7 @@ int getArrayElementIndexEx(const int maxSize, const int minSize = 0,
 }
 
 
-int getfromStdinUserIndex(const UserRegistry& users, const std::string& outputMessage="",
+int getfromStdinUserIndex(const UserRegister& users, const std::string& outputMessage="",
                           const std::string& inputMessage = "Inserisci il numero dell'utente che vuoi utlizzare: "){
     bool loop;
     int index;
@@ -81,7 +81,7 @@ int getfromStdinUserIndex(const UserRegistry& users, const std::string& outputMe
     return index;
 }
 
-int getfromStdinAnotherUserIndex(const UserRegistry& users, const std::string& message, const User& currentUser){
+int getfromStdinAnotherUserIndex(const UserRegister& users, const std::string& message, const User& currentUser){
     bool loop;
     int index;
     do {
@@ -170,7 +170,7 @@ int getUserMenuChoiceFromStdin(){
     }
 }
 
-void addUser(UserRegistry& userRegistry){
+void addUser(UserRegister& userRegistry){
     std::string name, surname;
     std::cout << "Inserisci il nome dell'utente: ";
     std::cin >> name;
@@ -180,7 +180,7 @@ void addUser(UserRegistry& userRegistry){
     std::cout << "Utente aggiunto correttamente!" << std::endl;
 }
 
-void removeUser(UserRegistry& userRegistry){
+void removeUser(UserRegister& userRegistry){
     if(!userRegistry.isEmpty()) {
         int index = getfromStdinUserIndex(userRegistry, "", "Seleziona l'utente da eliminare:");
         User userToDelete = userRegistry.getUserByIndex(index);
@@ -195,7 +195,7 @@ void printDivider(){
     std::cout << "------------------------------------------" << std::endl;
 }
 
-void userMenu(UserRegistry& userRegistry){
+void userMenu(UserRegister& userRegistry){
     bool loop;
     do {
         loop = true;
@@ -222,7 +222,7 @@ void userMenu(UserRegistry& userRegistry){
     } while (loop);
 }
 
-void showAllUsers(UserRegistry &registry) {
+void showAllUsers(UserRegister &registry) {
     if(registry.isEmpty())
         std::cout << "Il registro e'vuoto!" << std::endl;
     else
@@ -230,7 +230,7 @@ void showAllUsers(UserRegistry &registry) {
         registry.printAllUsers();
 }
 
-void chatMenu(const UserRegistry& userRegistry){
+void chatMenu(const UserRegister& userRegistry){
     User currentUser = userRegistry.getUserByIndex(getfromStdinUserIndex(userRegistry, "Lista Utenti: ")); // seleziona utente
     bool loop;
     do {

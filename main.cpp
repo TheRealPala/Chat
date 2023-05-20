@@ -1,12 +1,12 @@
 #include <iostream>
-#include "UserRegistry.h"
+#include "UserRegister.h"
 #include "Chat.h"
 #include "CuiWrapper.h"
 #include "UserChatRegister.h"
 
 int main() {
 
-    UserRegistry userRegistry;
+    UserRegister userRegistry;
     bool loop;
     do {
         loop = true;

@@ -2,27 +2,27 @@
 // Created by ale on 14/05/23.
 //
 
-#include "UserRegistry.h"
+#include "UserRegister.h"
 #include "fstream"
 #include <filesystem>
 #include "txtHandleFunctions.h"
 #include "CuiWrapper.h"
 
 
-bool UserRegistry::isEmpty() const{
+bool UserRegister::isEmpty() const{
     return users->empty();
 }
 
 
-UserRegistry::UserRegistry(const std::string& UserRegistryPath):UserRegistryPath(UserRegistryPath){
+UserRegister::UserRegister(const std::string& UserRegistryPath): UserRegistryPath(UserRegistryPath){
     initRegistry();
 };
 
-bool UserRegistry::enoughUsersToChat() const {
+bool UserRegister::enoughUsersToChat() const {
     return users->size() >= 2;
 }
 
-void UserRegistry::removeUser(const User& user){
+void UserRegister::removeUser(const User& user){
     if(!isEmpty()) {
         removeUserFromFile(user.getId(), this->UserRegistryPath);
         updateUsers();
@@ -32,14 +32,14 @@ void UserRegistry::removeUser(const User& user){
     }
 }
 
-void UserRegistry::initRegistry() {
+void UserRegister::initRegistry() {
         createTxtFile(this->UserRegistryPath.c_str(), "#id_nome_cognome_pathMailBox_createdAt\n");
         users = new std::vector<User>();
         updateUsers();
 }
 
 
-void UserRegistry::updateUsers()  {
+void UserRegister::updateUsers()  {
     std::fstream f(this->UserRegistryPath.c_str(), std::ios::in);
     std::string line;
     users->clear();
@@ -54,7 +54,7 @@ void UserRegistry::updateUsers()  {
 }
 
 
-bool UserRegistry::addUser(const User& user){
+bool UserRegister::addUser(const User& user){
     //add user to the registry
     std::fstream f(this->UserRegistryPath.c_str(), std::ios::app);
     if(!f.good()){
@@ -66,7 +66,7 @@ bool UserRegistry::addUser(const User& user){
     return true;
 }
 
-const User& UserRegistry::getUserById(const std::string& id) const {
+const User& UserRegister::getUserById(const std::string& id) const {
     for (auto &user : *users) {
         if (user.getId() == id) {
             return user;
@@ -76,18 +76,18 @@ const User& UserRegistry::getUserById(const std::string& id) const {
 
 }
 
-const std::vector<User>& UserRegistry::getAllUsers() const {
+const std::vector<User>& UserRegister::getAllUsers() const {
     return *users;
 }
 
-void UserRegistry::printAllUsers() const {
+void UserRegister::printAllUsers() const {
     for (auto &user : *users) {
         user.printUser();
         std::cout << std::endl;
     }
 }
 
-const bool UserRegistry::isUserInRegistry(const User &user) const {
+const bool UserRegister::isUserInRegistry(const User &user) const {
     bool found = false;
     for (auto &u : *users) {
         if (u == user) {
