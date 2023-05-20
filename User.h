@@ -71,6 +71,8 @@ public:
     const std::vector<Message> getMessages() const;
 
     const void printUser() const;
+
+    bool sendMessage(const Message &m, const User &re);
 };
 
 

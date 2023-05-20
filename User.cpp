@@ -61,6 +61,13 @@ bool User::sendMessage(const std::string &text, const User &re) {
     return true;
 }
 
+bool User::sendMessage(const Message &m, const User &re) {
+    if(m.getText().empty() || re == *this){
+        return false;
+    }
+    re.messBox.addMessage(m);
+    return true;
+}
 
 const MessageBox &User::getMessBox() const {
     return messBox;
