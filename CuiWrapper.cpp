@@ -8,14 +8,14 @@ void showAllUsers(UserRegister &registry);
 //
 // Created by ale on 16/05/23.
 //
-bool stringEqualsIgnoreCase(const std::string& s1, const std::string& s2){
+bool stringEqualsIgnoreCase(const std::string &s1, const std::string &s2) {
     bool result;
-    if(s1.size() != s2.size()){
+    if (s1.size() != s2.size()) {
         result = false;
     } else {
         result = true;
-        for(int i = 0; i < s1.size(); i++){
-            if(std::tolower(s1[i]) != std::tolower(s2[i])){
+        for (int i = 0; i < s1.size(); i++) {
+            if (std::tolower(s1[i]) != std::tolower(s2[i])) {
                 result = false;
                 break;
             }
@@ -23,47 +23,28 @@ bool stringEqualsIgnoreCase(const std::string& s1, const std::string& s2){
     }
     return result;
 }
-int getArrayElementIndexCheck(const int maxSize, const int minSize = 0, const std::string& message = ""){
-    int index;
-    bool loop;
-    do {
-        loop = false;
-        if(message != "")
-            std::cout << message << std::endl;
-        else
-            std::cout << "Inserisci un indice compreso tra " << minSize + 1 << " e " << maxSize << ": ";
-        std::cin >> index;
-        if(index < minSize || index > maxSize) {
-            std::cout << "Indice non valido!\nRiprova!" << std::endl;
-            loop = true;
-        }
-    } while (loop);
-    return index;
-}
-
 
 int getArrayElementIndexEx(const int maxSize, const int minSize = 0,
-                           const std::string& message = ""){
+                           const std::string &message = "") {
     int index = -1;
-    if(message != "")
+    if (message != "")
         std::cout << message << std::endl;
     else
         std::cout << "Inserisci un indice compreso tra " << minSize + 1 << " e " << maxSize << ": ";
     std::cin >> index;
-    if(index <= minSize || index > maxSize) {
+    if (index <= minSize || index > maxSize) {
         throw std::out_of_range("Indice non valido!\nRiprova!");
     }
     return --index;
 }
 
-
-int getfromStdinUserIndex(const UserRegister& users, const std::string& outputMessage="",
-                          const std::string& inputMessage = "Inserisci il numero dell'utente che vuoi utlizzare: "){
+int getfromStdinUserIndex(const UserRegister &users, const std::string &outputMessage = "",
+                          const std::string &inputMessage = "Inserisci il numero dell'utente che vuoi utlizzare: ") {
     bool loop;
     int index;
     do {
         loop = false;
-        if(outputMessage != "")
+        if (outputMessage != "")
             std::cout << outputMessage << std::endl;
         int count = 0;
         for (auto u: users.getAllUsers()) {
@@ -77,11 +58,11 @@ int getfromStdinUserIndex(const UserRegister& users, const std::string& outputMe
             loop = true;
             std::cout << e.what() << std::endl;
         }
-    }while(loop);
+    } while (loop);
     return index;
 }
 
-int getfromStdinAnotherUserIndex(const UserRegister& users, const std::string& message, const User& currentUser){
+int getfromStdinAnotherUserIndex(const UserRegister &users, const std::string &message, const User &currentUser) {
     bool loop;
     int index;
     do {
@@ -99,16 +80,16 @@ int getfromStdinAnotherUserIndex(const UserRegister& users, const std::string& m
             loop = true;
             std::cout << e.what() << std::endl;
         }
-        if(users.getUserByIndex(index) == currentUser){
+        if (users.getUserByIndex(index) == currentUser) {
             loop = true;
             std::cout << "Non puoi selezionare te stesso!\nRiprova!" << std::endl;
         }
-    }while(loop);
+    } while (loop);
     return index;
 }
 
-int getChatMenuChoiceFromStdin(){
-    for(;;) {
+int getChatMenuChoiceFromStdin() {
+    for (;;) {
         std::cout << "---USER MENU---" << std::endl;
         std::cout << "Opzioni disponibili:\n1) Cambia utente\n2) Invia messaggio"
                      "\n3) Guarda chat con un altro utente\n4) Elenco di tutti i messaggi inviati ad un altro utente"
@@ -125,17 +106,17 @@ int getChatMenuChoiceFromStdin(){
             return 4;
         } else if (stringEqualsIgnoreCase(choice, "esci") || choice == "5") {
             return 5;
-        }else {
+        } else {
             std::cout << "Scelta non valida!\nRiprova!" << std::endl;
         }
 
     }
 }
 
-int getMainMenuChoiceFromStdin(){
-    for(;;) {
+int getMainMenuChoiceFromStdin() {
+    for (;;) {
         std::cout << "---MAIN MENU---" << std::endl;
-        std::cout << "Opzioni disponibili:\n1) Gestisci utenti\n2) Messaggia\n3) Esci"<< std::endl;
+        std::cout << "Opzioni disponibili:\n1) Gestisci utenti\n2) Messaggia\n3) Esci" << std::endl;
         std::string choice;
         std::cin >> choice;
         if (stringEqualsIgnoreCase(choice, "Gestisci Utenti") || choice == "1") {
@@ -144,33 +125,34 @@ int getMainMenuChoiceFromStdin(){
             return 2;
         } else if (stringEqualsIgnoreCase(choice, "esci") || choice == "3") {
             return 3;
-        }else {
+        } else {
             std::cout << "Scelta non valida!\nRiprova!" << std::endl;
         }
     }
 }
 
-int getUserMenuChoiceFromStdin(){
-    for(;;) {
+int getUserMenuChoiceFromStdin() {
+    for (;;) {
         std::cout << "---USER MENU---" << std::endl;
-        std::cout << "Opzioni disponibili:\n1) Aggiungi utente\n2) Elimina utente\n3) Stampa lista utenti\n4) Esci"<< std::endl;
+        std::cout << "Opzioni disponibili:\n1) Aggiungi utente\n2) Elimina utente\n3) Stampa lista utenti\n4) Esci"
+                  << std::endl;
         std::string choice;
         std::cin >> choice;
         if (stringEqualsIgnoreCase(choice, "Aggiungi utente") || choice == "1") {
             return 1;
         } else if (stringEqualsIgnoreCase(choice, "Elimna Utente") || choice == "2") {
             return 2;
-        }else if (stringEqualsIgnoreCase(choice, "Stampa lista utenti") || choice == "3") {
+        } else if (stringEqualsIgnoreCase(choice, "Stampa lista utenti") || choice == "3") {
             return 3;
         } else if (stringEqualsIgnoreCase(choice, "esci") || choice == "4") {
             return 4;
-        }else {
+        } else {
             std::cout << "Scelta non valida!\nRiprova!" << std::endl;
         }
     }
 }
 
-void addUser(UserRegister& userRegistry){
+void addUser(UserRegister &userRegistry) {
     std::string name, surname;
     std::cout << "Inserisci il nome dell'utente: ";
     std::cin >> name;
@@ -180,22 +162,22 @@ void addUser(UserRegister& userRegistry){
     std::cout << "Utente aggiunto correttamente!" << std::endl;
 }
 
-void removeUser(UserRegister& userRegistry){
-    if(!userRegistry.isEmpty()) {
+void removeUser(UserRegister &userRegistry) {
+    if (!userRegistry.isEmpty()) {
         int index = getfromStdinUserIndex(userRegistry, "", "Seleziona l'utente da eliminare:");
         User userToDelete = userRegistry.getUserByIndex(index);
         userToDelete.getMessBox().deleteMessageBox();
         userRegistry.removeUser(userRegistry.getUserByIndex(index));
-    }else{
+    } else {
         std::cout << "Errore!\nNon ci sono utenti da eliminare!" << std::endl;
     }
 }
 
-void printDivider(){
+void printDivider() {
     std::cout << "------------------------------------------" << std::endl;
 }
 
-void userMenu(UserRegister& userRegistry){
+void userMenu(UserRegister &userRegistry) {
     bool loop;
     do {
         loop = true;
@@ -223,15 +205,16 @@ void userMenu(UserRegister& userRegistry){
 }
 
 void showAllUsers(UserRegister &registry) {
-    if(registry.isEmpty())
+    if (registry.isEmpty())
         std::cout << "Il registro e'vuoto!" << std::endl;
     else
         std::cout << "Lista utenti disponibili:" << std::endl;
-        registry.printAllUsers();
+    registry.printAllUsers();
 }
 
-void chatMenu(const UserRegister& userRegistry){
-    User currentUser = userRegistry.getUserByIndex(getfromStdinUserIndex(userRegistry, "Lista Utenti: ")); // seleziona utente
+void chatMenu(const UserRegister &userRegistry) {
+    User currentUser = userRegistry.getUserByIndex(
+            getfromStdinUserIndex(userRegistry, "Lista Utenti: ")); // seleziona utente
     bool loop;
     do {
         loop = true;
@@ -271,7 +254,8 @@ void chatMenu(const UserRegister& userRegistry){
             case 4: { // elenco di tutti i messaggi inviati con un altro utente
                 UserChatRegister userChatRegister(currentUser);
                 User otherUser = userRegistry.getUserByIndex(
-                        getfromStdinAnotherUserIndex(userRegistry, "Seleziona l'utente di cui vuoi vedere i messaggi inviati: ",
+                        getfromStdinAnotherUserIndex(userRegistry,
+                                                     "Seleziona l'utente di cui vuoi vedere i messaggi inviati: ",
                                                      currentUser));
                 userChatRegister.getMessagesSentWith(otherUser).printChat();
                 break;

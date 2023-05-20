@@ -1,8 +1,6 @@
 #include "gtest/gtest.h"
-
 #include "../User.h"
 #include "../UserRegister.h"
-#include "../txtHandleFunctions.h"
 #include "../Chat.h"
 #include "../UserChatRegister.h"
 
@@ -32,20 +30,20 @@ TEST_F(UserChatRegisterFixture, testGetMessagesSentWith) {
                                            Message(sender.getId(), receiver.getId(), "come stai?", 3),
                                            Message(receiver.getId(), sender.getId(), "bene tu?", 4),
                                            Message(sender.getId(), receiver.getId(), "bene anche io", 5)};
-    for(int i = 0; i < messagesOfChat.size(); i++) {
-        if(i % 2 == 0)
+    for (int i = 0; i < messagesOfChat.size(); i++) {
+        if (i % 2 == 0)
             ASSERT_TRUE(sender.sendMessage(messagesOfChat[i], receiver));
         else
             ASSERT_TRUE(receiver.sendMessage(messagesOfChat[i], sender));
     }
     UserChatRegister ucrSender(sender);
     UserChatRegister ucrReceiver(receiver);
-    std::vector<Message> messagesSentToReceiver=  ucrSender.getMessagesSentWith(receiver).getChat();
+    std::vector<Message> messagesSentToReceiver = ucrSender.getMessagesSentWith(receiver).getChat();
     std::vector<Message> messagesSentToSender = ucrReceiver.getMessagesSentWith(sender).getChat();
     short int tmpIndexReceiver = 0;
     short int tmpIndexSender = 0;
-    for(int i = 0; i < messagesOfChat.size(); i++) {
-        if(i % 2 == 0)
+    for (int i = 0; i < messagesOfChat.size(); i++) {
+        if (i % 2 == 0)
             ASSERT_EQ(messagesOfChat[i], messagesSentToReceiver[tmpIndexReceiver++]);
         else
             ASSERT_EQ(messagesOfChat[i], messagesSentToSender[tmpIndexSender++]);

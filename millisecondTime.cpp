@@ -4,8 +4,7 @@
 #include <chrono>
 #include "millisecondTime.h"
 
-long getCurrentUTC()
-{
+long getCurrentUTC() {
     std::chrono::time_point<std::chrono::system_clock> now =
             std::chrono::system_clock::now();
     auto duration = now.time_since_epoch();

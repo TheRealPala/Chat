@@ -2,7 +2,6 @@
 
 #include "../User.h"
 #include "../UserRegister.h"
-#include "../txtHandleFunctions.h"
 #include "../Chat.h"
 
 class ChatFixture : public ::testing::Test {
@@ -32,8 +31,8 @@ TEST_F(ChatFixture, testGenerateChat) {
                                            Message(sender.getId(), receiver.getId(), "come stai?", 3),
                                            Message(receiver.getId(), sender.getId(), "bene tu?", 4),
                                            Message(sender.getId(), receiver.getId(), "bene anche io", 5)};
-    for(int i = 0; i < messagesOfChat.size(); i++) {
-        if(i % 2 == 0)
+    for (int i = 0; i < messagesOfChat.size(); i++) {
+        if (i % 2 == 0)
             ASSERT_TRUE(sender.sendMessage(messagesOfChat[i], receiver));
         else
             ASSERT_TRUE(receiver.sendMessage(messagesOfChat[i], sender));
@@ -41,7 +40,7 @@ TEST_F(ChatFixture, testGenerateChat) {
     chat.generateChat();
     std::vector<Message> chatGenerated = chat.getChat();
     EXPECT_EQ(chatGenerated.size(), messagesOfChat.size());
-    for(int i = 0; i < chatGenerated.size(); i++) {
+    for (int i = 0; i < chatGenerated.size(); i++) {
         EXPECT_EQ(chatGenerated[i], messagesOfChat[i]) << "The " << i << "th message is different";
     }
 

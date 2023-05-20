@@ -12,6 +12,7 @@
 #include <chrono>
 #include <sstream>
 #include "millisecondTime.h"
+
 class Message {
     std::string id_from;
     std::string id_to;
@@ -20,18 +21,24 @@ class Message {
     bool read;
 public:
 
-    Message(const std::string &idFrom, const std::string &idTo, const std::string &text, const long &createdAt, const bool read): id_from(idFrom),
-                                                                                                                   id_to(idTo),
-                                                                                                                   text(text),
-                                                                                                                   createdAt(createdAt), read(read){};
+    Message(const std::string &idFrom, const std::string &idTo, const std::string &text, const long &createdAt,
+            const bool read) : id_from(idFrom),
+                               id_to(idTo),
+                               text(text),
+                               createdAt(createdAt), read(read) {};
 
-     Message(const std::string &idFrom, const std::string &idTo, const std::string &text, const long &createdAt): id_from(idFrom),
-                                                                                                                                    id_to(idTo),
-                                                                                                                                    text(text),
-                                                                                                                                    createdAt(createdAt), read(false){};
-     Message(const std::string &idFrom, const std::string &idTo, const std::string &text): id_from(idFrom),
-                                                                                           id_to(idTo),text(text), read(false), createdAt(getCurrentUTC()){};
-     Message():Message("alphanumericId", "alphanumericId", "textFixture"){};
+    Message(const std::string &idFrom, const std::string &idTo, const std::string &text, const long &createdAt)
+            : id_from(idFrom),
+              id_to(idTo),
+              text(text),
+              createdAt(createdAt), read(false) {};
+
+    Message(const std::string &idFrom, const std::string &idTo, const std::string &text) : id_from(idFrom),
+                                                                                           id_to(idTo), text(text),
+                                                                                           read(false), createdAt(
+                    getCurrentUTC()) {};
+
+    Message() : Message("alphanumericId", "alphanumericId", "textFixture") {};
 
     const std::string &getIdFrom() const {
         return id_from;

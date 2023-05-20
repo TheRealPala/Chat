@@ -10,10 +10,17 @@
 #include <vector>
 
 const std::vector<std::string> strExplode(std::string s, char del);
-bool isTxtFileEmpty(const std::string& path);
-void createTxtFile(const std::string& path, const std::string& initString="#defaultInitString (CHANGE_ME)");
-void removeUserFromFile(const std::string& idUserToRemove, const std::string& path );
+
+bool isTxtFileEmpty(const std::string &path);
+
+void createTxtFile(const std::string &path, const std::string &initString = "#defaultInitString (CHANGE_ME)");
+
+void removeUserFromFile(const std::string &idUserToRemove, const std::string &path);
+
 void blankFile(std::string path, std::string init);
-bool doesFileExist(const std::string& path);
-void deleteFile(const std::string& path);
+
+bool doesFileExist(const std::string &path);
+
+void deleteFile(const std::string &path);
+
 #endif //PALANOCHATUTENTI_TXTHANDLEFUNCTIONS_H

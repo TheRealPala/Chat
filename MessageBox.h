@@ -16,7 +16,8 @@ private:
     std::string ownerId;
 
 public:
-    MessageBox(const std::string& path="CHANGE_ME_defaultMessageBoxPath", const std::string& ownerId="0"):path(path), ownerId(ownerId){}
+    MessageBox(const std::string &path = "CHANGE_ME_defaultMessageBoxPath", const std::string &ownerId = "0") : path(
+            path), ownerId(ownerId) {}
 
     const std::string &getPath() const;
 
@@ -28,11 +29,11 @@ public:
 
     void deleteMessageBox() const;
 
-    void addMessage(const Message& message) const;
+    void addMessage(const Message &message) const;
 
     std::vector<Message> getAllMessages() const;
 
-    const std::string& getOwnerId() const;
+    const std::string &getOwnerId() const;
 
     void setOwner(const std::string &owner);
 

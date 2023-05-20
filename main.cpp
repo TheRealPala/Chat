@@ -1,8 +1,6 @@
 #include <iostream>
 #include "UserRegister.h"
-#include "Chat.h"
 #include "CuiWrapper.h"
-#include "UserChatRegister.h"
 
 int main() {
 
@@ -17,8 +15,10 @@ int main() {
                 break;
             }
             case 2: { // mesaggia
-                if(!userRegistry.enoughUsersToChat())
-                    std::cout << "Non ci sono abbastanza utenti disponibili!\nAggiungi almeno due utenti per messaggiare!" << std::endl;
+                if (!userRegistry.enoughUsersToChat())
+                    std::cout
+                            << "Non ci sono abbastanza utenti disponibili!\nAggiungi almeno due utenti per messaggiare!"
+                            << std::endl;
                 else
                     chatMenu(userRegistry);
                 break;

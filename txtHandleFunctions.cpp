@@ -4,15 +4,14 @@
 //functions to use txt files
 #include "txtHandleFunctions.h"
 
-void blankFile(std::string path, std::string init="#defaultInitString (CHANGE_ME)"){
+void blankFile(std::string path, std::string init = "#defaultInitString (CHANGE_ME)") {
     std::ofstream f(path);
-    if(!init.empty())
+    if (!init.empty())
         f << init;
     f.close();
 }
 
-const std::vector<std::string> strExplode(std::string s, char del)
-{
+const std::vector<std::string> strExplode(std::string s, char del) {
     std::stringstream ss(s);
     std::string word;
     std::vector<std::string> tokens;
@@ -24,26 +23,26 @@ const std::vector<std::string> strExplode(std::string s, char del)
 }
 
 
-bool isTxtFileEmpty(const std::string& path){
+bool isTxtFileEmpty(const std::string &path) {
     return std::filesystem::is_empty(path);
 }
 
 
-void createTxtFile(const std::string& path, const std::string& initString){
+void createTxtFile(const std::string &path, const std::string &initString) {
     std::fstream f(path);
-    if(!f.good()){ // se il file non esiste, lo creo
+    if (!f.good()) { // se il file non esiste, lo creo
         f.open(path, std::ios::out);
     }
-    if(isTxtFileEmpty(path)){
+    if (isTxtFileEmpty(path)) {
         f << initString;
     }
     f.close();
 }
 
-void removeUserFromFile(const std::string& idUserToRemove, const std::string& path ){
+void removeUserFromFile(const std::string &idUserToRemove, const std::string &path) {
     std::string line;
     std::ifstream fin;
-    std::vector <std::string> tokens;
+    std::vector<std::string> tokens;
     fin.open(path);
     std::ofstream temp;
     temp.open("temp.txt");
@@ -62,14 +61,14 @@ void removeUserFromFile(const std::string& idUserToRemove, const std::string& pa
     rename("temp.txt", path.c_str());
 }
 
-bool doesFileExist(const std::string& path){
+bool doesFileExist(const std::string &path) {
     std::ifstream f(path);
     bool ret = f.good();
     f.close();
     return ret;
 }
 
-void deleteFile(const std::string& path){
+void deleteFile(const std::string &path) {
     remove(path.c_str());
 }
 //function to use txt files

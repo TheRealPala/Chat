@@ -12,11 +12,8 @@ void MessageBox::persistMessageBox() const {
     createTxtFile(this->path, "#idFrom_createdAt_read_message\n");
 }
 
-bool MessageBox::isEmpty() const {
-    return isTxtFileEmpty(this->path);
-}
 
-const void MessageBox::blankMessageBox(){
+const void MessageBox::blankMessageBox() {
     blankFile(this->path, "#idFrom_createdAt_read_message\n");
 }
 
@@ -24,14 +21,12 @@ const std::string &MessageBox::getPath() const {
     return path;
 }
 
-void MessageBox::setPath(const std::string &path) {
-    MessageBox::path = path;
-}
 
 void MessageBox::addMessage(const Message &message) const {
     std::ofstream file;
     file.open(this->path, std::ios::app);
-    file << message.getIdFrom() + "_" + std::to_string(message.getCreatedAt()) + "_" + (message.isRead() ? "1" : "0") + "_" + message.getText() << std::endl;
+    file << message.getIdFrom() + "_" + std::to_string(message.getCreatedAt()) + "_" + (message.isRead() ? "1" : "0") +
+            "_" + message.getText() << std::endl;
     file.close();
 }
 
@@ -41,7 +36,7 @@ std::vector<Message> MessageBox::getAllMessages() const {
     std::string line;
     std::vector<Message> messages;
     while (std::getline(file, line)) {
-        if(line[0] == '#' || line.empty())
+        if (line[0] == '#' || line.empty())
             continue;
         std::vector<std::string> tokens = strExplode(line, '_');//0->idFrom, 1->createdAt, 2->read, 3->text
         //from_to_createdAt_read_text
@@ -51,12 +46,8 @@ std::vector<Message> MessageBox::getAllMessages() const {
     return messages;
 }
 
-const std::string& MessageBox::getOwnerId() const {
+const std::string &MessageBox::getOwnerId() const {
     return ownerId;
-}
-
-void MessageBox::setOwner(const std::string &ownerId){
-    this->ownerId = ownerId;
 }
 
 void MessageBox::deleteMessageBox() const {

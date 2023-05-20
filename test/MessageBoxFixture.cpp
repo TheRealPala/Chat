@@ -1,7 +1,5 @@
 #include "gtest/gtest.h"
-
 #include "../User.h"
-#include "../MessageBox.h"
 
 
 class MessageBoxSuite : public ::testing::Test {
@@ -9,9 +7,11 @@ class MessageBoxSuite : public ::testing::Test {
 protected:
     User owner;
     MessageBox messBox;
+
     virtual void TearDown() {
         messBox.deleteMessageBox();
     }
+
     virtual void SetUp() {
         owner.getMessBox().deleteMessageBox();
         owner = User("nomeOwner", "cognomeOwner");
@@ -20,7 +20,7 @@ protected:
 };
 
 
-TEST_F(MessageBoxSuite, Costructor){
+TEST_F(MessageBoxSuite, Costructor) {
     MessageBox messBox;
     ASSERT_EQ("CHANGE_ME_defaultMessageBoxPath", messBox.getPath());
     ASSERT_EQ("0", messBox.getOwnerId());
@@ -29,7 +29,7 @@ TEST_F(MessageBoxSuite, Costructor){
     ASSERT_EQ("newOwnerId", messBox.getOwnerId());
 }
 
-TEST_F(MessageBoxSuite, persistAndDeleteMessageBox){
+TEST_F(MessageBoxSuite, persistAndDeleteMessageBox) {
     EXPECT_TRUE(doesFileExist(owner.getMailBoxPath()));
     messBox.deleteMessageBox();
     EXPECT_FALSE(doesFileExist(owner.getMailBoxPath()));
@@ -37,7 +37,7 @@ TEST_F(MessageBoxSuite, persistAndDeleteMessageBox){
     EXPECT_TRUE(doesFileExist(owner.getMailBoxPath()));
 }
 
-TEST_F(MessageBoxSuite, addAndGetMessages){
+TEST_F(MessageBoxSuite, addAndGetMessages) {
     messBox.persistMessageBox();
     messBox.blankMessageBox();
     Message messA("125225", owner.getId(), "text");

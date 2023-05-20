@@ -1,8 +1,6 @@
 #include "gtest/gtest.h"
-
 #include "../User.h"
 #include "../UserRegister.h"
-#include "../txtHandleFunctions.h"
 
 class UserRegistrySuite : public ::testing::Test {
 
@@ -24,12 +22,12 @@ protected:
     UserRegister registry;
 };
 
-TEST_F(UserRegistrySuite, checkInitRegistry){
+TEST_F(UserRegistrySuite, checkInitRegistry) {
     EXPECT_TRUE(doesFileExist("config/userRegistry.txt"));
     blankFile("config/userRegistry.txt", "#id_nome_cognome_pathMailBox_createdAt\n");
 }
 
-TEST_F(UserRegistrySuite, checkAddANDDataReadUser){ //check add and get user
+TEST_F(UserRegistrySuite, checkAddANDDataReadUser) { //check add and get user
     registry.addUser(baseUser);
     EXPECT_TRUE(registry.isUserInRegistry(baseUser));
     readUser.getMessBox().deleteMessageBox();
@@ -42,7 +40,7 @@ TEST_F(UserRegistrySuite, checkAddANDDataReadUser){ //check add and get user
     ASSERT_EQ(baseUser.getMailBoxPath(), readUser.getMailBoxPath());
 }
 
-TEST_F(UserRegistrySuite, checkRemoveUser){
+TEST_F(UserRegistrySuite, checkRemoveUser) {
     blankFile("config/userRegistry.txt", "#id_nome_cognome_pathMailBox_createdAt\n");
     registry.addUser(baseUser);
     ASSERT_TRUE(registry.isUserInRegistry(baseUser));
@@ -50,7 +48,7 @@ TEST_F(UserRegistrySuite, checkRemoveUser){
     ASSERT_FALSE(registry.isUserInRegistry(baseUser));
 }
 
-TEST_F(UserRegistrySuite, checkUpdateUsers){
+TEST_F(UserRegistrySuite, checkUpdateUsers) {
     blankFile("config/userRegistry.txt", "#id_nome_cognome_pathMailBox_createdAt\n");
     registry.addUser(baseUser);
     registry.updateUsers();

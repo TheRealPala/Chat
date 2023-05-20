@@ -8,17 +8,17 @@
 
 Chat UserChatRegister::getMessagesSentWith(const User &user) const {
     std::vector<Message> messageSent;
-    for(auto m: user.getMessages()) {
-            if(m.getIdFrom() == this->user.getId()) {
-                messageSent.push_back(m);
-            }
+    for (auto m: user.getMessages()) {
+        if (m.getIdFrom() == this->user.getId()) {
+            messageSent.push_back(m);
         }
+    }
     return Chat(this->user, user, messageSent);
 }
 
-std::vector<Chat> UserChatRegister::getAllMessagesSent(const UserRegister& ur) const {
+std::vector<Chat> UserChatRegister::getAllMessagesSent(const UserRegister &ur) const {
     std::vector<Chat> allMessagesSent;
-    for(auto u: ur.getAllUsers()){
+    for (auto u: ur.getAllUsers()) {
         allMessagesSent.push_back(getMessagesSentWith(u));
     }
     return allMessagesSent;
