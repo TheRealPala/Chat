@@ -23,11 +23,17 @@ public:
     void setPath(const std::string &path);
 
     bool isEmpty() const;
+
     void persistMessageBox() const;
+
     void deleteMessageBox() const;
+
     void addMessage(const Message& message) const;
+
     std::vector<Message> getAllMessages() const;
+
     const std::string& getOwnerId() const;
+
     void setOwner(const std::string &owner);
 
     const void blankMessageBox();

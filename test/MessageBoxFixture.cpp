@@ -7,15 +7,15 @@
 class MessageBoxSuite : public ::testing::Test {
 
 protected:
-    User ownerA;
-    MessageBox messBoxA;
+    User owner;
+    MessageBox messBox;
     virtual void TearDown() {
-        messBoxA.deleteMessageBox();
+        messBox.deleteMessageBox();
     }
     virtual void SetUp() {
-        ownerA.getMessBox().deleteMessageBox();
-        ownerA = User("nomeOwner", "cognomeOwner");
-        messBoxA = ownerA.getMessBox();
+        owner.getMessBox().deleteMessageBox();
+        owner = User("nomeOwner", "cognomeOwner");
+        messBox = owner.getMessBox();
     }
 };
 
@@ -29,3 +29,23 @@ TEST_F(MessageBoxSuite, Costructor){
     ASSERT_EQ("newOwnerId", messBox.getOwnerId());
 }
 
+TEST_F(MessageBoxSuite, persistAndDeleteMessageBox){
+    EXPECT_TRUE(doesFileExist(owner.getMailBoxPath()));
+    messBox.deleteMessageBox();
+    EXPECT_FALSE(doesFileExist(owner.getMailBoxPath()));
+    messBox.persistMessageBox();
+    EXPECT_TRUE(doesFileExist(owner.getMailBoxPath()));
+}
+
+TEST_F(MessageBoxSuite, addAndGetMessages){
+    messBox.persistMessageBox();
+    messBox.blankMessageBox();
+    Message messA("125225", owner.getId(), "text");
+    Message messB("895632", owner.getId(), "text");
+    messBox.addMessage(messA);
+    messBox.addMessage(messB);
+    std::vector<Message> messages = messBox.getAllMessages();
+    EXPECT_EQ(2, messages.size());
+    ASSERT_EQ(messA.toHash(), messages[0].toHash());
+    ASSERT_EQ(messB.toHash(), messages[1].toHash());
+}

@@ -6,7 +6,6 @@
 #include "MessageBox.h"
 #include <iostream>
 #include "txtHandleFunctions.h"
-#include "User.h"
 
 
 void MessageBox::persistMessageBox() const {
@@ -61,5 +60,5 @@ void MessageBox::setOwner(const std::string &ownerId){
 }
 
 void MessageBox::deleteMessageBox() const {
-    remove(this->path.c_str());
+    deleteFile(this->path.c_str());
 }
