@@ -37,33 +37,22 @@ public:
         return id_from;
     }
 
-    void setIdFrom(const std::string &idFrom) {
-        id_from = idFrom;
-    }
 
     const std::string &getIdTo() const {
         return id_to;
     }
 
-    void setIdTo(const std::string &idTo) {
-        id_to = idTo;
-    }
 
     const std::string &getText() const {
         return text;
     }
 
-    void setText(const std::string &text) {
-        Message::text = text;
-    }
 
     const long getCreatedAt() const {
         return createdAt;
     }
 
-    void setCreatedAt(const long createdAt) {
-        Message::createdAt = createdAt;
-    }
+
     std::string toHash() const;
 
     bool operator==(const Message &rhs) const {
@@ -72,9 +61,7 @@ public:
 
     bool isRead() const;
 
-    void setRead(bool read);
 
-    void toString() const;
 };
 
 
