@@ -4,9 +4,7 @@
 
 #include "UserRegister.h"
 #include "fstream"
-#include <filesystem>
 #include "txtHandleFunctions.h"
-#include "CuiWrapper.h"
 
 
 bool UserRegister::isEmpty() const{
@@ -16,11 +14,13 @@ bool UserRegister::isEmpty() const{
 
 UserRegister::UserRegister(const std::string& UserRegistryPath): UserRegistryPath(UserRegistryPath){
     initRegistry();
-};
+}
+
 
 bool UserRegister::enoughUsersToChat() const {
     return users->size() >= 2;
 }
+
 
 void UserRegister::removeUser(const User& user){
     if(!isEmpty()) {
@@ -31,6 +31,7 @@ void UserRegister::removeUser(const User& user){
         std::cout << "Impossibile eliminare un utente! Il registro è vuoto!" << std::endl;
     }
 }
+
 
 void UserRegister::initRegistry() {
         createTxtFile(this->UserRegistryPath.c_str(), "#id_nome_cognome_pathMailBox_createdAt\n");
@@ -73,7 +74,6 @@ const User& UserRegister::getUserById(const std::string& id) const {
         }
     }
     throw std::invalid_argument("User not found");
-
 }
 
 const std::vector<User>& UserRegister::getAllUsers() const {
