@@ -4,6 +4,13 @@
 //functions to use txt files
 #include "txtHandleFunctions.h"
 
+void blankFile(std::string path, std::string init="#defaultInitString (CHANGE_ME)"){
+    std::ofstream f(path);
+    if(!init.empty())
+        f << init;
+    f.close();
+}
+
 const std::vector<std::string> strExplode(std::string s, char del)
 {
     std::stringstream ss(s);
@@ -32,7 +39,7 @@ void createTxtFile(const std::string& path, const std::string& initString){
     }
     f.close();
 }
-//TODO: IMPLEMENT THIS METHOD, FINISH CRUD ON THE USER, UPDATE MENU, UNIT TEST
+
 void removeUserFromFile(const std::string& idUserToRemove, const std::string& path ){
     std::string line;
     std::ifstream fin;
