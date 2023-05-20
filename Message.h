@@ -65,6 +65,7 @@ public:
         Message::createdAt = createdAt;
     }
     std::string toHash() const;
+
     bool operator==(const Message &rhs) const {
         return this->toHash() == rhs.toHash();
     }
