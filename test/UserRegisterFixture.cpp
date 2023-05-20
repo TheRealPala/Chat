@@ -13,9 +13,10 @@ protected:
     }
 
     virtual void TearDown() {
-      blankFile("config/userRegistry.txt", "#id_nome_cognome_pathMailBox_createdAt\n");
-      baseUser.getMessBox().deleteMessageBox();
-      readUser.getMessBox().deleteMessageBox();
+        blankFile("config/userRegistry.txt", "#id_nome_cognome_pathMailBox_createdAt\n");
+        baseUser.getMessBox().deleteMessageBox();
+        readUser.getMessBox().deleteMessageBox();
+        deleteFile("config/userRegistry.txt");
     }
 
     User baseUser;
