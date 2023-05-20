@@ -7,28 +7,33 @@
 class UserRegistrySuite : public ::testing::Test {
 
 protected:
+
     virtual void SetUp() {
         blankFile("config/userRegistry.txt", "#id_nome_cognome_pathMailBox_createdAt\n");
     }
+
     virtual void TearDown() {
       blankFile("config/userRegistry.txt", "#id_nome_cognome_pathMailBox_createdAt\n");
       baseUser.getMessBox().deleteMessageBox();
       readUser.getMessBox().deleteMessageBox();
     }
 
-    void deleteTxtFile(std::string path){
-        std::remove(path.c_str());
-    }
     User baseUser;
     User readUser;
     UserRegister registry;
 };
 
+TEST_F(UserRegistrySuite, checkInitRegistry){
+    EXPECT_TRUE(doesFileExist("config/userRegistry.txt"));
+    blankFile("config/userRegistry.txt", "#id_nome_cognome_pathMailBox_createdAt\n");
+}
 
-TEST_F(UserRegistrySuite, checkDataReadUser){
+TEST_F(UserRegistrySuite, checkAddANDDataReadUser){ //check add and get user
     registry.addUser(baseUser);
+    EXPECT_TRUE(registry.isUserInRegistry(baseUser));
     readUser.getMessBox().deleteMessageBox();
     readUser = registry.getAllUsers().at(0);
+    EXPECT_EQ(baseUser, readUser);
     ASSERT_EQ(baseUser.getId(), readUser.getId());
     ASSERT_EQ(baseUser.getName(), readUser.getName());
     ASSERT_EQ(baseUser.getSurname(), readUser.getSurname());
@@ -36,3 +41,21 @@ TEST_F(UserRegistrySuite, checkDataReadUser){
     ASSERT_EQ(baseUser.getMailBoxPath(), readUser.getMailBoxPath());
 }
 
+TEST_F(UserRegistrySuite, checkRemoveUser){
+    blankFile("config/userRegistry.txt", "#id_nome_cognome_pathMailBox_createdAt\n");
+    registry.addUser(baseUser);
+    ASSERT_TRUE(registry.isUserInRegistry(baseUser));
+    registry.removeUser(baseUser);
+    ASSERT_FALSE(registry.isUserInRegistry(baseUser));
+}
+
+TEST_F(UserRegistrySuite, checkUpdateUsers){
+    blankFile("config/userRegistry.txt", "#id_nome_cognome_pathMailBox_createdAt\n");
+    registry.addUser(baseUser);
+    registry.updateUsers();
+    EXPECT_TRUE(!registry.isEmpty());
+    ASSERT_EQ(registry.getUserById(baseUser.getId()), baseUser);
+    blankFile("config/userRegistry.txt", "#id_nome_cognome_pathMailBox_createdAt\n");
+    registry.updateUsers();
+    ASSERT_TRUE(registry.isEmpty());
+}

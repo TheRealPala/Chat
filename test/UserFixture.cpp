@@ -47,11 +47,11 @@ TEST_F(UserSuite, sendMessage) {
 TEST_F(UserSuite, getMessage) {
     blankFile(userC.getMailBoxPath(), "#idFrom_idTo_text\n");
     std::vector<Message> messagesSent = {Message(userA.getId(), userC.getId(), "mess1"),
-                                     Message(userB.getId(), userC.getId(), "mess2")};
-    userA.sendMessage(messagesSent.at(0).getText(), userC);
-    userB.sendMessage(messagesSent.at(1).getText(), userC);
+                                     Message(userA.getId(), userC.getId(), "mess2")};
+    userA.sendMessage(messagesSent[0], userC);
+    userA.sendMessage(messagesSent[1], userC);
     std::vector<Message> messagesReceived = userC.getMessages();
     for(int i = 0; i < messagesSent.size(); i++){
-        ASSERT_EQ(messagesSent.at(i), messagesReceived.at(i));
+        ASSERT_EQ(messagesSent.at(i), messagesReceived.at(i)) << "i: " << i << std::endl;
     }
 }
