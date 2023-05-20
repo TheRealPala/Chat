@@ -68,4 +68,8 @@ bool doesFileExist(const std::string& path){
     f.close();
     return ret;
 }
+
+void deleteFile(const std::string& path){
+    remove(path.c_str());
+}
 //function to use txt files

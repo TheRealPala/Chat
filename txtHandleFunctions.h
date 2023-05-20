@@ -15,4 +15,5 @@ void createTxtFile(const std::string& path, const std::string& initString="#defa
 void removeUserFromFile(const std::string& idUserToRemove, const std::string& path );
 void blankFile(std::string path, std::string init);
 bool doesFileExist(const std::string& path);
+void deleteFile(const std::string& path);
 #endif //PALANOCHATUTENTI_TXTHANDLEFUNCTIONS_H
