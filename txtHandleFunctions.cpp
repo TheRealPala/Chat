@@ -61,4 +61,11 @@ void removeUserFromFile(const std::string& idUserToRemove, const std::string& pa
     remove(path.c_str());
     rename("temp.txt", path.c_str());
 }
+
+bool doesFileExist(const std::string& path){
+    std::ifstream f(path);
+    bool ret = f.good();
+    f.close();
+    return ret;
+}
 //function to use txt files
