@@ -27,13 +27,7 @@ public:
                                                                                                                                                       createdAt(createdAt),
                                                                                                                                                       messBox(messBoxPath, this->id){};
 
-    const std::string &getMessBoxPath() const;
-
-    void setMessBoxPath(const std::string &messBoxPath);
-
     const MessageBox &getMessBox() const;
-
-    void setMessBox(const MessageBox &messBox);
 
     User(const std::string&  id, const std::string& name, const std::string& surname, const std::string& mailBoxPath) : id(id), name(name),
                                                     surname(surname), messBoxPath(mailBoxPath), messBox(messBoxPath, this->id),
@@ -58,19 +52,11 @@ public:
 
     const std::string &getId() const;
 
-    void setId(const std::string &id);
-
     const std::string &getName() const;
-
-    void setName(const std::string &name);
 
     const std::string &getSurname() const;
 
-    void setSurname(const std::string &surname);
-
     const std::string &getMailBoxPath() const;
-
-    void setMailBoxPath(const std::string &mailBoxPath);
 
     const std::string toString() const;
 
@@ -80,11 +66,7 @@ public:
 
     std::string toHash() const;
 
-    void sendMessage(const Message& m, const User& receiver);
-
-    void sendMessage(const Message &m, const MessageBox &messageBox);
-
-    void sendMessage(const std::string &m, const User &receiver);
+    bool sendMessage(const std::string &m, const User &receiver);
 
     const std::vector<Message> getMessages() const;
 
