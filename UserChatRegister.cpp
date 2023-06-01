@@ -15,11 +15,3 @@ Chat UserChatRegister::getMessagesSentWith(const User &user) const {
     }
     return Chat(this->user, user, messageSent);
 }
-
-std::vector<Chat> UserChatRegister::getAllMessagesSent(const UserRegister &ur) const {
-    std::vector<Chat> allMessagesSent;
-    for (auto u: ur.getAllUsers()) {
-        allMessagesSent.push_back(getMessagesSentWith(u));
-    }
-    return allMessagesSent;
-}

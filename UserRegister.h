@@ -41,13 +41,7 @@ public:
 
     bool enoughUsersToChat() const;
 
-    bool deleteUser(const User &u);
-
-    void removeUser();
-
     const bool isUserInRegistry(const User &user) const;
-
-    const User &getUserById(const std::string &id) const;
 };
 
 

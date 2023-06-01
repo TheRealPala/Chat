@@ -3,6 +3,7 @@
 //
 
 #include "Chat.h"
+#include "CuiWrapper.h"
 
 void Chat::generateChat() {
     std::vector<Message> messagesOfSender = userSender.getMessages();
@@ -38,7 +39,9 @@ void Chat::printChat() const {
         std::cout << "Non ci sono messaggi da visualizzare!" << std::endl;
         return;
     }
-    for (auto m: chat) {
+    printDivider();
+    std::cout << "Chat tra " << userSender.getShortIdentificator() << " e " << userReceiver.getShortIdentificator() << "\n" << std::endl;
+    for (const auto& m: chat) {
         std::string from = m.getIdFrom() == userSender.getId() ? userSender.getName() : userReceiver.getName();
         std::cout << from << ": " << m.getText() << std::endl;
     }

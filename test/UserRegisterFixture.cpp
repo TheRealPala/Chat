@@ -53,7 +53,6 @@ TEST_F(UserRegistrySuite, checkUpdateUsers) {
     registry.addUser(baseUser);
     registry.updateUsers();
     EXPECT_TRUE(!registry.isEmpty());
-    ASSERT_EQ(registry.getUserById(baseUser.getId()), baseUser);
     blankFile("config/userRegistry.txt", "#id_nome_cognome_pathMailBox_createdAt\n");
     registry.updateUsers();
     ASSERT_TRUE(registry.isEmpty());

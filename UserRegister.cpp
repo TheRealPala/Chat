@@ -44,12 +44,16 @@ void UserRegister::updateUsers() {
     std::string line;
     users->clear();
     while (std::getline(f, line)) {
-        if (line[0] == '#' || line.empty()) {
+        if(line.empty())
             continue;
+        else {
+            if (line[0] == '#') {
+                continue;
+            }
+            std::vector<std::string> splittedLine = strExplode(line, '_');
+            User u(splittedLine[0], splittedLine[1], splittedLine[2], splittedLine[3], splittedLine[4]);
+            users->push_back(u);
         }
-        std::vector<std::string> splittedLine = strExplode(line, '_');
-        User u(splittedLine[0], splittedLine[1], splittedLine[2], splittedLine[3], splittedLine[4]);
-        users->push_back(u);
     }
 }
 
@@ -65,15 +69,6 @@ bool UserRegister::addUser(const User &user) {
     f.close();
     updateUsers();
     return true;
-}
-
-const User &UserRegister::getUserById(const std::string &id) const {
-    for (auto &user: *users) {
-        if (user.getId() == id) {
-            return user;
-        }
-    }
-    throw std::invalid_argument("User not found");
 }
 
 const std::vector<User> &UserRegister::getAllUsers() const {

@@ -36,11 +36,15 @@ std::vector<Message> MessageBox::getAllMessages() const {
     std::string line;
     std::vector<Message> messages;
     while (std::getline(file, line)) {
-        if (line[0] == '#' || line.empty())
+        if(line.empty())
             continue;
-        std::vector<std::string> tokens = strExplode(line, '_');//0->idFrom, 1->createdAt, 2->read, 3->text
-        //from_to_createdAt_read_text
-        messages.push_back(Message(tokens[0], ownerId, tokens[3], std::stol(tokens[1]), tokens[2] == "1"));
+        else {
+            if (line[0] == '#')
+                continue;
+            std::vector<std::string> tokens = strExplode(line, '_');//0->idFrom, 1->createdAt, 2->read, 3->text
+            //from_to_createdAt_read_text
+            messages.push_back(Message(tokens[0], ownerId, tokens[3], std::stol(tokens[1]), tokens[2] == "1"));
+        }
     }
     file.close();
     return messages;

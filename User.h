@@ -75,6 +75,10 @@ public:
     const void printUser() const;
 
     bool sendMessage(const Message &m, const User &re);
+
+    std::string getShortIdentificator() const {
+        return name + " " + surname;
+    }
 };
 
 

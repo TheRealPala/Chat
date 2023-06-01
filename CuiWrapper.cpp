@@ -27,7 +27,7 @@ bool stringEqualsIgnoreCase(const std::string &s1, const std::string &s2) {
 int getArrayElementIndexEx(const int maxSize, const int minSize = 0,
                            const std::string &message = "") {
     int index = -1;
-    if (message != "")
+    if (!message.empty())
         std::cout << message << std::endl;
     else
         std::cout << "Inserisci un indice compreso tra " << minSize + 1 << " e " << maxSize << ": ";
@@ -44,7 +44,7 @@ int getfromStdinUserIndex(const UserRegister &users, const std::string &outputMe
     int index;
     do {
         loop = false;
-        if (outputMessage != "")
+        if (!outputMessage.empty())
             std::cout << outputMessage << std::endl;
         int count = 0;
         for (auto u: users.getAllUsers()) {
@@ -219,7 +219,7 @@ void chatMenu(const UserRegister &userRegistry) {
     do {
         loop = true;
         printDivider();
-        std::cout << "Utente selezionato: " << currentUser.getName() + " " + currentUser.getSurname() << std::endl;
+        std::cout << "Utente selezionato: " << currentUser.getShortIdentificator() << std::endl;
         int choice = getChatMenuChoiceFromStdin();
         switch (choice) {
             case 1: {// cambia utente
