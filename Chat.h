@@ -28,8 +28,9 @@ public:
 
     int countAllMessages() const;
 
-    int countReadMessages() const;
+    int countNotReadMessages() const;
 
+    void printChatStatistics() const;
 private:
     void generateChat();
 

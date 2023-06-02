@@ -13,7 +13,7 @@ void MessageBox::persistMessageBox() const {
 }
 
 
-const void MessageBox::blankMessageBox() {
+ void MessageBox::blankMessageBox() const{
     blankFile(this->path, "#idFrom_createdAt_read_message\n");
 }
 
@@ -56,4 +56,28 @@ const std::string &MessageBox::getOwnerId() const {
 
 void MessageBox::deleteMessageBox() const {
     deleteFile(this->path.c_str());
+}
+
+void MessageBox::markAllMessagesAsRead() const {
+    std::vector<Message> messages = getAllMessages();
+    for (auto& m: messages) {
+        m.setRead(true);
+    }
+    blankMessageBox();
+    for (const auto& m: messages) {
+        addMessage(m);
+    }
+}
+
+void MessageBox::countNotReadMessages() const {
+    std::vector<Message> messages = getAllMessages();
+    int count = 0;
+    for (const auto& m: messages) {
+        if(!m.isRead())
+            count++;
+    }
+    if (count == 0)
+        std::cout << "Non ci sono messaggi da leggere!" << std::endl;
+    else
+        std::cout << "Messaggi non letti: " << count << std::endl;
 }

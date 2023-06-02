@@ -12,3 +12,7 @@ std::string Message::toHash() const {
 bool Message::isRead() const {
     return read;
 }
+
+void Message::setRead(bool read) {
+    Message::read = read;
+}

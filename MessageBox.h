@@ -37,7 +37,11 @@ public:
 
     void setOwner(const std::string &owner);
 
-    const void blankMessageBox();
+    void blankMessageBox() const;
+
+    void markAllMessagesAsRead() const;
+
+    void countNotReadMessages() const;
 };
 
 

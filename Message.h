@@ -33,12 +33,12 @@ public:
               text(text),
               createdAt(createdAt), read(false) {};
 
-    Message(const std::string &idFrom, const std::string &idTo, const std::string &text) : id_from(idFrom),
+    Message(const std::string &idFrom, const std::string &idTo, const std::string &text, const bool read) : id_from(idFrom),
                                                                                            id_to(idTo), text(text),
-                                                                                           read(false), createdAt(
+                                                                                           read(read), createdAt(
                     getCurrentUTC()) {};
 
-    Message() : Message("alphanumericId", "alphanumericId", "textFixture") {};
+    Message() : Message("alphanumericId", "alphanumericId", "textFixture", false) {};
 
     const std::string &getIdFrom() const {
         return id_from;
@@ -67,6 +67,8 @@ public:
     }
 
     bool isRead() const;
+
+    void setRead(bool read);
 
 
 };

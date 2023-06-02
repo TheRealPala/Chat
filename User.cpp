@@ -57,7 +57,7 @@ bool User::sendMessage(const std::string &text, const User &re) {
     if (text.empty() || re == *this) {
         return false;
     }
-    Message m(this->id, re.getId(), text);
+    Message m(this->id, re.getId(), text, false);
     re.messBox.addMessage(m);
     return true;
 }

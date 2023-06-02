@@ -91,21 +91,25 @@ int getfromStdinAnotherUserIndex(const UserRegister &users, const std::string &m
 int getChatMenuChoiceFromStdin() {
     for (;;) {
         std::cout << "---USER MENU---" << std::endl;
-        std::cout << "Opzioni disponibili:\n1) Cambia utente\n2) Invia messaggio"
-                     "\n3) Guarda chat con un altro utente\n4) Elenco di tutti i messaggi inviati ad un altro utente"
-                     "\n5) Esci" << std::endl;
+        std::cout << "Opzioni disponibili:\n1) Cambia utente\n2) Visualizza numero messaggi da leggere\n3) Invia messaggio"
+                     "\n4) Guarda chat con un altro utente\n5) Elenco di tutti i messaggi inviati ad un altro utente"
+                     "\n6) Visualizza le statistiche dei messaggi inviati ad un utente\n7) Esci" << std::endl;
         std::string choice;
         std::cin >> choice;
         if (stringEqualsIgnoreCase(choice, "cambia utente") || choice == "1") {
             return 1;
-        } else if (stringEqualsIgnoreCase(choice, "invia messaggio") || choice == "2") {
+        } else if (stringEqualsIgnoreCase(choice, "numero messggi") || choice == "2") {
             return 2;
-        } else if (stringEqualsIgnoreCase(choice, "guarda chat con un altro utente") || choice == "3") {
-            return 3;
-        } else if (stringEqualsIgnoreCase(choice, "elenco di tutti i messaggi inviati") || choice == "4") {
+        } else if (stringEqualsIgnoreCase(choice, "invia messaggio") || choice == "3") {
+                return 3;
+        } else if (stringEqualsIgnoreCase(choice, "guarda chat con un altro utente") || choice == "4") {
             return 4;
-        } else if (stringEqualsIgnoreCase(choice, "esci") || choice == "5") {
+        } else if (stringEqualsIgnoreCase(choice, "elenco di tutti i messaggi inviati") || choice == "5") {
             return 5;
+        } else if (stringEqualsIgnoreCase(choice, "statistiche") || choice == "6") {
+            return 6;
+        } else if (stringEqualsIgnoreCase(choice, "esci") || choice == "7") {
+            return 7;
         } else {
             std::cout << "Scelta non valida!\nRiprova!" << std::endl;
         }
@@ -229,7 +233,11 @@ void chatMenu(const UserRegister &userRegistry) {
                 std::cout << "Utente cambiato correttamente!" << std::endl;
                 break;
             }
-            case 2: { // invia messaggio
+            case 2: { // visualiza numero messaggi da leggere
+                currentUser.getMessBox().countNotReadMessages();
+                break;
+            }
+            case 3: { // invia messaggio
                 User reciever = userRegistry.getUserByIndex(
                         getfromStdinAnotherUserIndex(userRegistry,
                                                      "Seleziona l'utente a cui vuoi inviare il messaggio: ",
@@ -243,7 +251,7 @@ void chatMenu(const UserRegister &userRegistry) {
                 std::cout << "Messaggio inviato correttamente!" << std::endl;
                 break;
             }
-            case 3: {// guarda chat con un altro utente
+            case 4: {// guarda chat con un altro utente
                 User otherUser = userRegistry.getUserByIndex(
                         getfromStdinAnotherUserIndex(userRegistry, "Seleziona l'utente con cui vuoi vedere la chat: ",
                                                      currentUser));
@@ -251,7 +259,7 @@ void chatMenu(const UserRegister &userRegistry) {
                 chat.printChat();
                 break;
             }
-            case 4: { // elenco di tutti i messaggi inviati con un altro utente
+            case 5: { // elenco di tutti i messaggi inviati con un altro utente
                 UserChatRegister userChatRegister(currentUser);
                 User otherUser = userRegistry.getUserByIndex(
                         getfromStdinAnotherUserIndex(userRegistry,
@@ -260,7 +268,15 @@ void chatMenu(const UserRegister &userRegistry) {
                 userChatRegister.getMessagesSentWith(otherUser).printChat();
                 break;
             }
-            case 5: { // esci
+            case 6: { //statistiche chat con un altro utente
+                User otherUser = userRegistry.getUserByIndex(
+                        getfromStdinAnotherUserIndex(userRegistry,
+                                                     "Seleziona l'utente con cui vuoi vedere le statistiche della chat: ",
+                                                     currentUser));
+                Chat chat(currentUser, otherUser);
+                chat.printChatStatistics();
+            }
+            case 7: { // esci
                 loop = false;
                 break;
             }
