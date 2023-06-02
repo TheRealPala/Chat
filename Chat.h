@@ -22,12 +22,16 @@ public:
     Chat(const User &userSender, const User &userReceiver, const std::vector<Message> &chat) : userSender(userSender),
                                                                                                userReceiver(userReceiver),
                                                                                                chat(chat) {}
-
-    void generateChat();
-
     const std::vector<Message> &getChat() const;
 
     void printChat() const;
+
+    int countAllMessages() const;
+
+    int countReadMessages() const;
+
+private:
+    void generateChat();
 
 };
 

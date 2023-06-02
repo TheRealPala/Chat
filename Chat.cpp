@@ -4,12 +4,13 @@
 
 #include "Chat.h"
 #include "CuiWrapper.h"
+#include "stdlib.h"
 
 void Chat::generateChat() {
     std::vector<Message> messagesOfSender = userSender.getMessages();
     std::vector<Message> messagesOfReceiver = userReceiver.getMessages();
-    std::vector<Message>::iterator itSender = messagesOfSender.begin();
-    std::vector<Message>::iterator itReceiver = messagesOfReceiver.begin();
+    auto itSender = messagesOfSender.begin();
+    auto itReceiver = messagesOfReceiver.begin();
     //merge of message in order to get an ordered chat
     while (itSender != messagesOfSender.end() && itReceiver != messagesOfReceiver.end()) {
         if (itSender->getCreatedAt() < itReceiver->getCreatedAt()) {
@@ -46,4 +47,18 @@ void Chat::printChat() const {
         std::cout << from << ": " << m.getText() << std::endl;
     }
 
+}
+
+int Chat::countAllMessages() const {
+    return static_cast<int>(chat.size());
+}
+
+int Chat::countReadMessages() const {
+    int count = 0;
+    for (const auto& m: chat) {
+        if (m.isRead()) {
+            count++;
+        }
+    }
+    return count;
 }

@@ -1,5 +1,4 @@
 #include "gtest/gtest.h"
-
 #include "../User.h"
 #include "../UserRegister.h"
 #include "../Chat.h"
@@ -25,7 +24,6 @@ protected:
 };
 
 TEST_F(ChatFixture, testGenerateChat) {
-    Chat chat(sender, receiver);
     std::vector<Message> messagesOfChat = {Message(sender.getId(), receiver.getId(), "ciao", 1),
                                            Message(receiver.getId(), sender.getId(), "ciao", 2),
                                            Message(sender.getId(), receiver.getId(), "come stai?", 3),
@@ -37,7 +35,7 @@ TEST_F(ChatFixture, testGenerateChat) {
         else
             ASSERT_TRUE(receiver.sendMessage(messagesOfChat[i], sender));
     }
-    chat.generateChat();
+    Chat chat(sender, receiver);
     std::vector<Message> chatGenerated = chat.getChat();
     EXPECT_EQ(chatGenerated.size(), messagesOfChat.size());
     for (int i = 0; i < chatGenerated.size(); i++) {
