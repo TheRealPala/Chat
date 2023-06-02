@@ -40,8 +40,8 @@ TEST_F(MessageBoxSuite, persistAndDeleteMessageBox) {
 TEST_F(MessageBoxSuite, addAndGetMessages) {
     messBox.persistMessageBox();
     messBox.blankMessageBox();
-    Message messA("125225", owner.getId(), "text");
-    Message messB("895632", owner.getId(), "text");
+    Message messA("125225", owner.getId(), "text", false);
+    Message messB("895632", owner.getId(), "text", false);
     messBox.addMessage(messA);
     messBox.addMessage(messB);
     std::vector<Message> messages = messBox.getAllMessages();

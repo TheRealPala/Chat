@@ -25,11 +25,11 @@ protected:
 };
 
 TEST_F(UserChatRegisterFixture, testGetMessagesSentWith) {
-    std::vector<Message> messagesOfChat = {Message(sender.getId(), receiver.getId(), "ciao", 1),
-                                           Message(receiver.getId(), sender.getId(), "ciao", 2),
-                                           Message(sender.getId(), receiver.getId(), "come stai?", 3),
-                                           Message(receiver.getId(), sender.getId(), "bene tu?", 4),
-                                           Message(sender.getId(), receiver.getId(), "bene anche io", 5)};
+    std::vector<Message> messagesOfChat = {Message(sender.getId(), receiver.getId(), "ciao", 1, false),
+                                           Message(receiver.getId(), sender.getId(), "ciao", 2, false),
+                                           Message(sender.getId(), receiver.getId(), "come stai?", 3, false),
+                                           Message(receiver.getId(), sender.getId(), "bene tu?", 4, false),
+                                           Message(sender.getId(), receiver.getId(), "bene anche io", 5, false)};
     for (int i = 0; i < messagesOfChat.size(); i++) {
         if (i % 2 == 0)
             ASSERT_TRUE(sender.sendMessage(messagesOfChat[i], receiver));

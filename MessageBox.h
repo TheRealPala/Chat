@@ -41,7 +41,7 @@ public:
 
     void markAllMessagesAsRead() const;
 
-    void countNotReadMessages() const;
+    int countNotReadMessages() const;
 };
 
 

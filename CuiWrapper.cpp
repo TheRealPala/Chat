@@ -234,7 +234,9 @@ void chatMenu(const UserRegister &userRegistry) {
                 break;
             }
             case 2: { // visualiza numero messaggi da leggere
-                currentUser.getMessBox().countNotReadMessages();
+                int c = currentUser.getMessBox().countNotReadMessages();
+                std::cout << ((c == 0) ? "Non ci sono messaggi da leggere!" : "Ci sono " + std::to_string(c) +
+                                                                          " messaggi da leggere!" )<< std::endl;
                 break;
             }
             case 3: { // invia messaggio

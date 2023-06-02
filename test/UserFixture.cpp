@@ -48,12 +48,23 @@ TEST_F(UserSuite, sendMessage) {
 
 TEST_F(UserSuite, getMessage) {
     blankFile(userC.getMailBoxPath(), "#idFrom_idTo_text\n");
-    std::vector<Message> messagesSent = {Message(userA.getId(), userC.getId(), "mess1"),
-                                         Message(userA.getId(), userC.getId(), "mess2")};
+    std::vector<Message> messagesSent = {Message(userA.getId(), userC.getId(), "mess1", false),
+                                         Message(userA.getId(), userC.getId(), "mess2", false)};
     userA.sendMessage(messagesSent[0], userC);
     userA.sendMessage(messagesSent[1], userC);
     std::vector<Message> messagesReceived = userC.getMessages();
     for (int i = 0; i < messagesSent.size(); i++) {
         ASSERT_EQ(messagesSent.at(i), messagesReceived.at(i)) << "i: " << i << std::endl;
     }
+}
+
+TEST_F(UserSuite, testCountNotReadMessages){
+    blankFile(userC.getMailBoxPath(), "#idFrom_idTo_text\n");
+    std::vector<Message> messagesSent = {Message(userA.getId(), userC.getId(), "mess1", false),
+                                         Message(userA.getId(), userC.getId(), "mess2", false)};
+    for(const auto& mess : messagesSent)
+        userA.sendMessage(mess, userC);
+    ASSERT_EQ(2, userC.getMessBox().countNotReadMessages());
+    userC.getMessBox().markAllMessagesAsRead();
+    ASSERT_EQ(0, userC.getMessBox().countNotReadMessages());
 }

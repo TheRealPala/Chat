@@ -69,15 +69,12 @@ void MessageBox::markAllMessagesAsRead() const {
     }
 }
 
-void MessageBox::countNotReadMessages() const {
+int MessageBox::countNotReadMessages() const {
     std::vector<Message> messages = getAllMessages();
     int count = 0;
     for (const auto& m: messages) {
         if(!m.isRead())
             count++;
     }
-    if (count == 0)
-        std::cout << "Non ci sono messaggi da leggere!" << std::endl;
-    else
-        std::cout << "Messaggi non letti: " << count << std::endl;
+    return count;
 }
